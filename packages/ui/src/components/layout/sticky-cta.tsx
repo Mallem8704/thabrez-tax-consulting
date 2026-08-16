@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { PhoneCall, Calendar, MessageCircle } from 'lucide-react';
+import { PhoneCall, Calendar } from 'lucide-react';
+import { WhatsAppIcon } from '../whatsapp-icon';
 
 export function StickyConsultationCta(): JSX.Element {
   const whatsappNumber = '918802222422';
@@ -17,11 +18,11 @@ export function StickyConsultationCta(): JSX.Element {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:scale-110 hover:bg-[#20bd5a] active:scale-95 border-2 border-white/40"
+        className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:scale-110 hover:bg-[#20bd5a] active:scale-95 border-2 border-white/50"
         title="Instant WhatsApp with Senior CA"
         aria-label="Chat on WhatsApp with Senior CA"
       >
-        <MessageCircle className="h-6 w-6 fill-white text-[#25D366]" />
+        <WhatsAppIcon size={28} className="fill-white" />
       </a>
 
       {/* Main High-Contrast Consultation Trigger */}

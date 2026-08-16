@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Header, Footer, Button } from '@thabrez/ui';
+import { Header, Footer, Button, WhatsAppIcon } from '@thabrez/ui';
 import { companyInfo } from '@thabrez/config/company-content';
 import {
   Phone,
@@ -13,7 +13,6 @@ import {
   AlertCircle,
   Building,
   ShieldCheck,
-  MessageCircle,
   PhoneCall,
   FileUp,
   Scale,
@@ -121,7 +120,7 @@ export default function ContactPage(): JSX.Element {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-105"
               >
-                <MessageCircle className="h-4 w-4 fill-white" /> Quick WhatsApp Consultation
+                <WhatsAppIcon size={18} className="fill-white" /> Quick WhatsApp Consultation
               </a>
               <a
                 href="tel:8802222422"
@@ -410,8 +409,8 @@ export default function ContactPage(): JSX.Element {
 
                   <div className="space-y-4 text-xs sm:text-sm text-slate-700">
                     <div className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 shrink-0">
-                        <MessageCircle className="h-5 w-5" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#25D366]/15 text-[#25D366] shrink-0">
+                        <WhatsAppIcon size={20} className="fill-[#25D366]" />
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">

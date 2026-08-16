@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { BrandLogo } from '../brand-logo';
 import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../whatsapp-icon';
 
 export function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();
@@ -52,6 +53,17 @@ export function Footer(): JSX.Element {
                   className="hover:text-white transition-colors underline-offset-2 hover:underline"
                 >
                   ca.thabrez@thabreztaxconsulting.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <WhatsAppIcon size={14} className="fill-[#25D366] shrink-0" />
+                <a
+                  href="https://wa.me/918802222422?text=Hi%20Thabrez%20%26%20Co.%20Chartered%20Accountants"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+                >
+                  WhatsApp Partner Desk (+91 88022 22422)
                 </a>
               </div>
               <div className="flex items-center gap-2">

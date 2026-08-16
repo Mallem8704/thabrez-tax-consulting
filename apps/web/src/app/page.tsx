@@ -1,14 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Button } from '@thabrez/ui';
-import { Header, Footer } from '@thabrez/ui';
+import { Button, Header, Footer, WhatsAppIcon } from '@thabrez/ui';
 import { serviceCategories } from '@thabrez/config/company-content';
 import {
   ShieldCheck,
   ArrowRight,
   Clock,
   Lock,
-  MessageCircle,
   Sparkles,
   CheckCircle2,
 } from 'lucide-react';
@@ -188,7 +186,7 @@ export default function HomePage(): JSX.Element {
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 h-12 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-[1.02]"
                   >
-                    <MessageCircle className="h-4 w-4 fill-white" />
+                    <WhatsAppIcon size={18} className="fill-white" />
                     <span>WhatsApp a CA</span>
                     <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-mono font-normal">
                       &lt;5m SLA

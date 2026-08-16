@@ -39,3 +39,4 @@ export { BrandLogo, type BrandLogoProps } from './components/brand-logo';
 export { Header, type HeaderProps } from './components/layout/header';
 export { Footer } from './components/layout/footer';
 export { StickyConsultationCta } from './components/layout/sticky-cta';
+export { WhatsAppIcon, WhatsAppBadge, type WhatsAppIconProps } from './components/whatsapp-icon';
