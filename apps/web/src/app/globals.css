@@ -223,5 +223,5 @@
   );
   transform: translateX(-100%) skewX(-20deg);
   animation: lightShimmer 5s ease-in-out infinite;
-  pointer-events-none;
+  pointer-events: none;
 }

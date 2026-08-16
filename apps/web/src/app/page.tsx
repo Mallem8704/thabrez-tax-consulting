@@ -10,10 +10,10 @@ import {
   Lock,
   MessageCircle,
   Sparkles,
-  Calculator,
   CheckCircle2,
-  Calendar,
 } from 'lucide-react';
+
+import { MasterHeroCommandCenter } from '../components/home/master-hero-command-center';
 
 export const metadata: Metadata = {
   title: 'Thabrez Tax Consulting — Premier Chartered Accountants in India',
@@ -111,7 +111,7 @@ export default function HomePage(): JSX.Element {
   ];
 
   const whatsappUrl = `https://wa.me/918802222422?text=${encodeURIComponent(
-    'Hi Thabrez & Co. Chartered Accountants, I would like to schedule a consultation regarding tax optimization / GST / corporate filing.',
+    'Hi Thabrez & Co. Chartered Accountants, I would like to schedule an urgent consultation regarding tax optimization / GST notice / corporate filing.',
   )}`;
 
   return (
@@ -119,40 +119,66 @@ export default function HomePage(): JSX.Element {
       <Header currentPath="/" />
 
       <main className="flex-1">
-        {/* High-Converting Hero Section with Cinematic Depth */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#16233E] via-[#1B2A4A] to-[#121B30] pt-16 pb-20 text-white sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 border-b border-slate-800/60">
-          {/* Atmospheric Cinematic Floating Lighting */}
-          <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#8B3FA8]/20 blur-3xl pointer-events-none animate-atmosphere-1" />
-          <div className="absolute bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#E8823A]/15 blur-3xl pointer-events-none animate-atmosphere-2" />
+        {/* Master Institutional Hero Section */}
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#0F172A] via-[#16233E] to-[#1B2A4A] pt-12 pb-20 text-white sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-32 border-b border-slate-800/60">
+          {/* Multi-layered Atmospheric Spotlights */}
+          <div className="absolute top-[-10%] left-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-[#8B3FA8]/25 blur-[120px] pointer-events-none animate-atmosphere-1" />
+          <div className="absolute bottom-[-10%] right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-[#E8823A]/20 blur-[140px] pointer-events-none animate-atmosphere-2" />
 
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-              {/* Left Hero Column */}
-              <div className="lg:col-span-7 space-y-7 text-center lg:text-left cinematic-fade-left">
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
+              {/* Left Column: Magnetic High-Prestige Copy & Value Props */}
+              <div className="lg:col-span-6 space-y-6 text-center lg:text-left cinematic-fade-left">
+                {/* Live Authority Status Pill */}
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
                   </span>
-                  ICAI Certified Chartered Accountants &bull; Peer-Reviewed Firm
+                  <span>Direct CA Partner Access • Bengaluru &amp; Kadiri</span>
                 </div>
 
-                <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.14] text-white">
-                  Strategic Tax Optimization &amp; Corporate Advisory for High-Growth Enterprises
+                {/* Punchy Master Headline */}
+                <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.12] text-white">
+                  Precision Tax Law.<br />
+                  <span className="bg-gradient-to-r from-emerald-300 via-amber-200 to-[#E8823A] bg-clip-text text-transparent">
+                    Zero-Penalty Peace of Mind.
+                  </span>
                 </h1>
 
-                <p className="text-base sm:text-lg leading-relaxed text-slate-200 max-w-2xl mx-auto lg:mx-0 font-normal">
-                  From statutory audits and monthly GST/ITR filings to complex appellate tribunal representation — our Chartered Accountants deliver impenetrable compliance and maximum tax savings.
+                {/* Subtitle statement */}
+                <p className="text-sm sm:text-base leading-relaxed text-slate-200 max-w-xl mx-auto lg:mx-0 font-normal">
+                  We protect high-growth enterprises, founders, and global NRIs with aggressive legal tax optimization, airtight compliance, and relentless statutory dispute defense.
                 </p>
 
-                {/* Primary Dual CTAs */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                {/* Interactive Practice Quick-Pills */}
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start pt-1">
+                  {[
+                    'Corporate Audits & ITR',
+                    'GST Notice Defense',
+                    'Pvt Ltd & LLP Setup',
+                    'Section 115BAC Savings',
+                    '15CA/CB NRI Advisory',
+                  ].map((pill, pIdx) => (
+                    <span
+                      key={pIdx}
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1 rounded-full text-slate-200 transition-colors"
+                    >
+                      <Sparkles className="h-2.5 w-2.5 text-[#E8823A]" />
+                      <span>{pill}</span>
+                    </span>
+                  ))}
+                </div>
+
+                {/* High-Converting Action CTAs */}
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                   <Link href="/contact" className="w-full sm:w-auto">
                     <Button
                       size="xl"
-                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8 h-12 rounded-xl text-sm shimmer-sweep"
+                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-2xl px-8 h-12 rounded-xl text-xs sm:text-sm shimmer-sweep"
                     >
-                      Schedule Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                      <span>Book Free Partner Consultation</span>
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
 
@@ -160,81 +186,40 @@ export default function HomePage(): JSX.Element {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 h-12 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-[1.02]"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 h-12 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-[1.02]"
                   >
-                    <MessageCircle className="h-4 w-4 fill-white" /> WhatsApp a CA Partner
+                    <MessageCircle className="h-4 w-4 fill-white" />
+                    <span>WhatsApp a CA</span>
+                    <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-mono font-normal">
+                      &lt;5m SLA
+                    </span>
                   </a>
                 </div>
 
-                {/* Hard Trust Pillars */}
-                <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-200 font-semibold">
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
+                {/* Institutional Proof Badges */}
+                <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-[11px] text-slate-200 font-semibold">
+                  <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
                     <ShieldCheck className="h-4 w-4 text-[#E8823A] shrink-0" />
-                    <span>100% ICAI Certified Partners</span>
+                    <span>₹24.8 Cr+ Tax Saved</span>
                   </div>
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
+                  <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
+                    <Clock className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <span>15-Min Response SLA</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
+                    <CheckCircle2 className="h-4 w-4 text-[#E8823A] shrink-0" />
+                    <span>100% ICAI Certified</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
                     <Lock className="h-4 w-4 text-emerald-400 shrink-0" />
-                    <span>Bank-Grade 256-Bit Encrypted Vault</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
-                    <Clock className="h-4 w-4 text-[#E8823A] shrink-0" />
-                    <span>15-Min Response SLA Guarantee</span>
+                    <span>256-Bit Vault Security</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Hero Column: Interactive Tax Calculator Teaser Card */}
-              <div className="lg:col-span-5 cinematic-fade-right">
-                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6 cinematic-card">
-                  <div className="flex items-center justify-between border-b border-white/15 pb-3.5">
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
-                      <Sparkles className="h-4 w-4 text-emerald-300" /> Free Tax Estimator
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-300">Budget 2024 / 2025 Slabs</span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <h3 className="text-xl font-bold text-white font-display">
-                      Old vs New Regime Savings Calculator
-                    </h3>
-                    <p className="text-xs text-slate-300">
-                      Find out which regime saves you more taxes under Section 115BAC.
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl bg-black/40 p-4 border border-white/10 space-y-3">
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-300 font-medium">Average Salary Tax Savings:</span>
-                      <span className="font-mono text-emerald-400 font-extrabold text-base">₹48,500</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-300 font-medium">MSME Presumptive Tax Benefit:</span>
-                      <span className="font-mono text-emerald-400 font-extrabold text-base">Up to 50% Flat</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2.5">
-                    <Link href="/calculators/income-tax-calculator" className="block">
-                      <button
-                        type="button"
-                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs shadow-md transition-all shimmer-sweep"
-                      >
-                        <Calculator className="h-4 w-4" />
-                        <span>Launch Full Tax Calculator &rarr;</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/compliance-calendar" className="block">
-                      <button
-                        type="button"
-                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-all"
-                      >
-                        <Calendar className="h-3.5 w-3.5 text-[#E8823A]" />
-                        <span>View 2025-26 Compliance Calendar</span>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+              {/* Right Column: Live Interactive Command Center */}
+              <div className="lg:col-span-6 cinematic-fade-right">
+                <MasterHeroCommandCenter />
               </div>
             </div>
           </div>
