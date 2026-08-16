@@ -119,16 +119,16 @@ export default function HomePage(): JSX.Element {
       <Header currentPath="/" />
 
       <main className="flex-1">
-        {/* High-Converting Hero Section */}
+        {/* High-Converting Hero Section with Cinematic Depth */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[#16233E] via-[#1B2A4A] to-[#121B30] pt-16 pb-20 text-white sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 border-b border-slate-800/60">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#8B3FA8]/15 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#E8823A]/10 blur-3xl pointer-events-none" />
+          {/* Atmospheric Cinematic Floating Lighting */}
+          <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#8B3FA8]/20 blur-3xl pointer-events-none animate-atmosphere-1" />
+          <div className="absolute bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#E8823A]/15 blur-3xl pointer-events-none animate-atmosphere-2" />
 
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Left Hero Column */}
-              <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+              <div className="lg:col-span-7 space-y-7 text-center lg:text-left cinematic-fade-left">
                 <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -150,7 +150,7 @@ export default function HomePage(): JSX.Element {
                   <Link href="/contact" className="w-full sm:w-auto">
                     <Button
                       size="xl"
-                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8 h-12 rounded-xl text-sm"
+                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8 h-12 rounded-xl text-sm shimmer-sweep"
                     >
                       Schedule Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -168,15 +168,15 @@ export default function HomePage(): JSX.Element {
 
                 {/* Hard Trust Pillars */}
                 <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-200 font-semibold">
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
                     <ShieldCheck className="h-4 w-4 text-[#E8823A] shrink-0" />
                     <span>100% ICAI Certified Partners</span>
                   </div>
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
                     <Lock className="h-4 w-4 text-emerald-400 shrink-0" />
                     <span>Bank-Grade 256-Bit Encrypted Vault</span>
                   </div>
-                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm cinematic-card">
                     <Clock className="h-4 w-4 text-[#E8823A] shrink-0" />
                     <span>15-Min Response SLA Guarantee</span>
                   </div>
@@ -184,8 +184,8 @@ export default function HomePage(): JSX.Element {
               </div>
 
               {/* Right Hero Column: Interactive Tax Calculator Teaser Card */}
-              <div className="lg:col-span-5">
-                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+              <div className="lg:col-span-5 cinematic-fade-right">
+                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6 cinematic-card">
                   <div className="flex items-center justify-between border-b border-white/15 pb-3.5">
                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
                       <Sparkles className="h-4 w-4 text-emerald-300" /> Free Tax Estimator
@@ -217,7 +217,7 @@ export default function HomePage(): JSX.Element {
                     <Link href="/calculators/income-tax-calculator" className="block">
                       <button
                         type="button"
-                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs shadow-md transition-all"
+                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs shadow-md transition-all shimmer-sweep"
                       >
                         <Calculator className="h-4 w-4" />
                         <span>Launch Full Tax Calculator &rarr;</span>
@@ -240,12 +240,12 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Stats Grid */}
+        {/* Stats Grid with Cinematic Fade */}
         <section className="border-b border-slate-200 bg-white py-12">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
               {stats.map((stat, i) => (
-                <div key={i} className="space-y-1 py-2">
+                <div key={i} className={`space-y-1 py-2 cinematic-fade-up delay-${(i + 1) * 75}`}>
                   <p className="font-mono text-3xl font-extrabold text-[#1B2A4A] sm:text-4xl">
                     {stat.value}
                   </p>
@@ -258,10 +258,10 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Industry Vertical Solutions */}
+        {/* Industry Vertical Solutions with Staggered Cascades */}
         <section className="py-20 bg-slate-50 border-b border-slate-200/80">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="text-center max-w-2xl mx-auto space-y-3 cinematic-fade-up">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
                 Tailored Industry Expertise
               </span>
@@ -277,7 +277,7 @@ export default function HomePage(): JSX.Element {
               {industryVerticals.map((vert, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3"
+                  className={`rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3 cinematic-card cinematic-fade-up delay-${(idx + 1) * 75}`}
                 >
                   <span className="inline-block rounded-md bg-[#8B3FA8]/10 text-[#8B3FA8] text-[11px] font-bold px-2.5 py-1">
                     {vert.badge}
@@ -293,7 +293,7 @@ export default function HomePage(): JSX.Element {
         {/* Practice Areas / Services Showcase */}
         <section className="py-20 bg-white border-b border-slate-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4 cinematic-fade-up">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#E8823A]">
                   Core Practice Areas
@@ -314,7 +314,7 @@ export default function HomePage(): JSX.Element {
               {serviceCategories.slice(0, 3).map((cat, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm hover:border-[#8B3FA8]/40 transition-all space-y-4 flex flex-col justify-between"
+                  className={`rounded-2xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm hover:border-[#8B3FA8]/40 transition-all space-y-4 flex flex-col justify-between cinematic-card cinematic-fade-up delay-${(idx + 1) * 150}`}
                 >
                   <div className="space-y-3">
                     <h3 className="text-lg font-bold text-slate-900 font-display">
@@ -348,7 +348,7 @@ export default function HomePage(): JSX.Element {
         {/* 3-Step Simple Process */}
         <section className="py-20 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="text-center max-w-2xl mx-auto space-y-3 cinematic-fade-up">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
                 Streamlined Execution
               </span>
@@ -361,7 +361,7 @@ export default function HomePage(): JSX.Element {
               {steps.map((st, i) => (
                 <div
                   key={i}
-                  className="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-4"
+                  className={`relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-4 cinematic-card cinematic-fade-up delay-${(i + 1) * 150}`}
                 >
                   <span className="font-mono text-3xl font-extrabold text-[#8B3FA8]/30 block">
                     {st.step}
@@ -374,10 +374,10 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Client Testimonials */}
+        {/* Client Testimonials with Smooth Reveal */}
         <section className="py-20 bg-white border-b border-slate-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="text-center max-w-2xl mx-auto space-y-3 cinematic-fade-up">
               <span className="text-xs font-bold uppercase tracking-wider text-[#E8823A]">
                 Proven Client Trust
               </span>
@@ -390,7 +390,7 @@ export default function HomePage(): JSX.Element {
               {testimonials.map((t, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 shadow-sm space-y-4 flex flex-col justify-between"
+                  className={`rounded-2xl border border-slate-200 bg-slate-50/60 p-6 shadow-sm space-y-4 flex flex-col justify-between cinematic-card cinematic-fade-in delay-${(idx + 1) * 150}`}
                 >
                   <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
                     &ldquo;{t.quote}&rdquo;
@@ -410,7 +410,7 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* High-Impact Bottom CTA Strip */}
-        <section className="bg-[#1B2A4A] py-16 text-white text-center">
+        <section className="bg-[#1B2A4A] py-16 text-white text-center cinematic-fade-up">
           <div className="container mx-auto max-w-4xl px-4 space-y-6">
             <h2 className="text-2xl sm:text-4xl font-bold font-display">
               Ready to Minimize Taxes and Protect Your Enterprise?
@@ -420,7 +420,7 @@ export default function HomePage(): JSX.Element {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link href="/contact">
-                <Button size="lg" className="w-full sm:w-auto bg-[#E8823A] hover:bg-[#E8823A]/90 text-white font-bold px-8 shadow-lg">
+                <Button size="lg" className="w-full sm:w-auto bg-[#E8823A] hover:bg-[#E8823A]/90 text-white font-bold px-8 shadow-lg shimmer-sweep">
                   Book Free Strategic Review <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>

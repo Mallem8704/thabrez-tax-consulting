@@ -135,13 +135,13 @@ export default function CalculatorsHubPage(): JSX.Element {
         <section className="py-20 bg-white">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {calculatorTools.map((tool) => {
+              {calculatorTools.map((tool, idx) => {
                 const Icon = tool.icon;
                 return (
                   <Link
                     key={tool.slug}
                     href={`/calculators/${tool.slug}`}
-                    className="group rounded-2xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between hover:shadow-md hover:border-slate-300 transition-all"
+                    className={`group rounded-2xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between hover:shadow-md hover:border-slate-300 transition-all cinematic-card cinematic-fade-up delay-${(idx % 3 + 1) * 150}`}
                   >
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
@@ -179,7 +179,7 @@ export default function CalculatorsHubPage(): JSX.Element {
         </section>
 
         {/* Bottom Consultation Banner */}
-        <section className="py-16 bg-[#1B2A4A] text-white border-t border-slate-800">
+        <section className="py-16 bg-[#1B2A4A] text-white border-t border-slate-800 cinematic-fade-up">
           <div className="container mx-auto max-w-4xl px-4 text-center space-y-4">
             <h2 className="text-2xl sm:text-3xl font-bold font-display">
               Need Professional Chartered Accountant Verification?
@@ -190,9 +190,9 @@ export default function CalculatorsHubPage(): JSX.Element {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] px-6 py-3 text-sm font-semibold text-white shadow hover:opacity-95 transition-opacity"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] px-6 py-3 text-sm font-semibold text-white shadow hover:opacity-95 transition-opacity shimmer-sweep"
               >
-                Schedule Free CA Consultation <ArrowRight className="h-4 w-4" />
+                Schedule Free CA Consultation <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
           </div>

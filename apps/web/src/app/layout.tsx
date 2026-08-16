@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { StickyConsultationCta } from '@thabrez/ui';
 import { AuthSessionProvider } from '../components/providers/session-provider';
+import { CinematicObserver } from '../components/cinematic/cinematic-observer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -58,6 +59,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <AuthSessionProvider>
+          <CinematicObserver />
           {children}
           <StickyConsultationCta />
         </AuthSessionProvider>

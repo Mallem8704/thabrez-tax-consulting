@@ -78,7 +78,7 @@ export default function ServicesOverviewPage(): JSX.Element {
                       return (
                         <div
                           key={sIdx}
-                          className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between hover:shadow-md hover:border-slate-300 transition-all"
+                          className={`rounded-2xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between hover:shadow-md hover:border-slate-300 transition-all cinematic-card cinematic-fade-up delay-${(sIdx % 3 + 1) * 150}`}
                         >
                           <div className="space-y-3">
                             <div className="flex items-start justify-between gap-2">
@@ -129,7 +129,7 @@ export default function ServicesOverviewPage(): JSX.Element {
         </section>
 
         {/* CTA Footer banner */}
-        <section className="py-16 bg-[#1B2A4A] text-white border-t border-slate-800">
+        <section className="py-16 bg-[#1B2A4A] text-white border-t border-slate-800 cinematic-fade-up">
           <div className="container mx-auto max-w-4xl px-4 text-center space-y-5">
             <h2 className="text-2xl sm:text-3xl font-bold font-display">
               Need a Custom Multi-Entity or Multi-State Retainer?
@@ -139,7 +139,7 @@ export default function ServicesOverviewPage(): JSX.Element {
             </p>
             <div className="pt-2">
               <Link href="/contact">
-                <Button size="xl" className="bg-[#E8823A] text-white hover:bg-[#E8823A]/90 font-semibold shadow-lg">
+                <Button size="xl" className="bg-[#E8823A] text-white hover:bg-[#E8823A]/90 font-semibold shadow-lg shimmer-sweep">
                   Speak Directly with a Senior CA <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
