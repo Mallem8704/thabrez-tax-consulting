@@ -14,7 +14,8 @@ export const companyInfo = {
   email: "ca.thabrez@thabreztaxconsulting.com", // confirmed current email from firm's own marketing material — supersedes info@ used on the old site
   website: "www.thabreztaxconsulting.com",
   hours: "Monday - Saturday: 10am to 7pm, Sunday: Closed",
-  mapCoordinates: { lat: 28.654472249999998, lng: 77.1830131 }, // registered office
+  mapCoordinates: { lat: 14.11432, lng: 78.15974 }, // Kadiri, Sri Satya Sai District, Andhra Pradesh 515591
+  branchCoordinates: { lat: 12.9648, lng: 77.5925 }, // Bengaluru branch office
   socialLinks: {
     // TODO: replace with the firm's real profile URLs before launch —
     // the old site's links pointed to generic platform homepages, not

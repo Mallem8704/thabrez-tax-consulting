@@ -16,6 +16,8 @@ import {
   PhoneCall,
   FileUp,
   Scale,
+  Navigation,
+  ExternalLink,
 } from 'lucide-react';
 
 export default function ContactPage(): JSX.Element {
@@ -87,7 +89,18 @@ export default function ContactPage(): JSX.Element {
     }
   };
 
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${companyInfo.mapCoordinates.lat},${companyInfo.mapCoordinates.lng}&hl=en&z=15&output=embed`;
+  const [activeMapOffice, setActiveMapOffice] = useState<'KADIRI' | 'BENGALURU'>('KADIRI');
+
+  const kadiriAddress = `${companyInfo.registeredOffice.line1}, ${companyInfo.registeredOffice.city} - ${companyInfo.registeredOffice.pincode}`;
+  const bengaluruAddress = `${companyInfo.branchOffice.line1}, ${companyInfo.branchOffice.city} - ${companyInfo.branchOffice.pincode}`;
+  const currentMapAddress = activeMapOffice === 'KADIRI' ? kadiriAddress : bengaluruAddress;
+
+  const currentMapQuery = activeMapOffice === 'KADIRI'
+    ? 'Opposite Sangam Theatre, Kadiri, Andhra Pradesh 515591'
+    : 'No.56 4th Cross Sun Rise Colony CN Halli Bengaluru 560002';
+
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(currentMapQuery)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  const googleMapsDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentMapQuery)}`;
 
   return (
     <div className="flex min-h-screen flex-col bg-background selection:bg-[#8B3FA8] selection:text-white">
@@ -511,23 +524,64 @@ export default function ContactPage(): JSX.Element {
               </div>
             </div>
 
-            {/* Google Map Section */}
-            <div className="mt-16 space-y-4 border-t border-slate-200 pt-12">
-              <div className="space-y-1">
-                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#E8823A]" /> Registered Office Map Location
-                </h3>
-                <p className="text-xs text-slate-500">
-                  {companyInfo.registeredOffice.line1}, {companyInfo.registeredOffice.city} - {companyInfo.registeredOffice.pincode}
-                </p>
+            {/* Google Map Section with Office Location Switcher */}
+            <div className="mt-16 space-y-6 border-t border-slate-200 pt-12">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2 font-display">
+                    <MapPin className="h-5 w-5 text-[#E8823A]" />
+                    {activeMapOffice === 'KADIRI' ? 'Kadiri Registered Office (Main HQ)' : 'Bengaluru Branch Office'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    {currentMapAddress}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="inline-flex rounded-xl bg-slate-200/80 p-1 border border-slate-300">
+                    <button
+                      type="button"
+                      onClick={() => setActiveMapOffice('KADIRI')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        activeMapOffice === 'KADIRI'
+                          ? 'bg-[#1B2A4A] text-white shadow-sm'
+                          : 'text-slate-700 hover:text-slate-900'
+                      }`}
+                    >
+                      Kadiri HQ
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveMapOffice('BENGALURU')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        activeMapOffice === 'BENGALURU'
+                          ? 'bg-[#1B2A4A] text-white shadow-sm'
+                          : 'text-slate-700 hover:text-slate-900'
+                      }`}
+                    >
+                      Bengaluru Office
+                    </button>
+                  </div>
+
+                  <a
+                    href={googleMapsDirectionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-xs font-bold text-slate-800 shadow-sm hover:bg-slate-50 transition-colors"
+                  >
+                    <Navigation className="h-3.5 w-3.5 text-[#E8823A]" />
+                    <span>Get Directions</span>
+                    <ExternalLink className="h-3 w-3 text-slate-400" />
+                  </a>
+                </div>
               </div>
 
-              <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+              <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-md relative bg-slate-100">
                 <iframe
-                  title="Registered Office Map"
+                  title={activeMapOffice === 'KADIRI' ? 'Kadiri Registered Office Map' : 'Bengaluru Branch Office Map'}
                   src={mapEmbedUrl}
                   width="100%"
-                  height="360"
+                  height="400"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
