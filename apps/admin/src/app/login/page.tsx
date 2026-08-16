@@ -14,6 +14,7 @@ import {
   Input,
   Label,
   Badge,
+  BrandLogo,
 } from '@thabrez/ui';
 import {
   Lock,
@@ -235,13 +236,7 @@ function AdminLoginContent(): JSX.Element {
       {/* Dense Staff Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center mb-6">
         <div className="flex justify-center mb-3">
-          <div className="relative h-12 w-56 rounded-lg bg-white/95 p-1.5 shadow-sm">
-            <img
-              src="/logo-lockup.png"
-              alt="Thabrez Tax Consulting"
-              className="h-full w-full object-contain"
-            />
-          </div>
+          <BrandLogo variant="dark" size="md" />
         </div>
         <div className="inline-flex items-center gap-2 mb-1">
           <Badge variant="outline" className="text-[10px] font-mono border-zinc-700 bg-zinc-900 text-zinc-300">
