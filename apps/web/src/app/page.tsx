@@ -15,10 +15,13 @@ import {
   TrendingUp,
   FileCheck2,
   Users2,
+  MessageCircle,
+  Sparkles,
+  Calculator,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Thabrez Tax Consulting — Expert Chartered Accountants in India',
+  title: 'Thabrez Tax Consulting — Premier Chartered Accountants in India',
   description:
     'Premier Chartered Accountancy and tax consulting firm. Specialized in Income Tax litigation, GST advisory, company incorporation, and banking project reports.',
   keywords: [
@@ -50,18 +53,41 @@ export default function HomePage(): JSX.Element {
   const steps = [
     {
       step: '01',
-      title: 'Consult & Share Documents',
-      desc: 'Connect with a certified CA to assess your tax or incorporation needs. Upload documents through our encrypted client portal.',
+      title: 'Consult & Upload Documents',
+      desc: 'Connect with a certified CA to evaluate your tax liability or statutory notice. Upload documents directly into your bank-grade encrypted client vault.',
     },
     {
       step: '02',
-      title: 'CA Review & Drafting',
-      desc: 'Our partners review statutory calculations, reconcile GST/AIS, and draft legal filings in full compliance with current laws.',
+      title: 'Senior CA Audit & Tax Optimization',
+      desc: 'Our partners review statutory calculations, reconcile GSTN/AIS/TIS data, and structure legal deductions to minimize your liability.',
     },
     {
       step: '03',
-      title: 'Filing & Statutory Ack',
+      title: 'Filing & Instant Government Ack',
       desc: 'We file directly with MCA, GSTN, or Income Tax portals and deliver verified government acknowledgments and challans.',
+    },
+  ];
+
+  const industryVerticals = [
+    {
+      title: 'Tech Startups & SaaS',
+      badge: 'Section 80-IAC & Angel Tax',
+      desc: 'DPIIT tax holiday exemptions, ESOP valuation, cross-border remittance, and transfer pricing.',
+    },
+    {
+      title: 'Manufacturing & MSMEs',
+      badge: 'Section 43B(h) & GST ITC',
+      desc: 'MSME 45-day payment compliance, inverted duty structure refunds, and CMA banking reports.',
+    },
+    {
+      title: 'Doctors, Lawyers & Consultants',
+      badge: 'Section 44ADA 50% Scheme',
+      desc: 'Presumptive taxation, advance tax scheduling, and asset protection planning.',
+    },
+    {
+      title: 'NRIs & Global Expats',
+      badge: 'Form 15CA/CB & DTAA',
+      desc: 'Repatriation certification, capital gains on Indian real estate, and foreign tax credits.',
     },
   ];
 
@@ -89,59 +115,118 @@ export default function HomePage(): JSX.Element {
     },
   ];
 
+  const whatsappUrl = `https://wa.me/918802222422?text=${encodeURIComponent(
+    'Hi Thabrez & Co. Chartered Accountants, I would like to schedule a consultation regarding tax optimization / GST / corporate filing.',
+  )}`;
+
   return (
     <div className="flex min-h-screen flex-col bg-background selection:bg-[#8B3FA8] selection:text-white">
       <Header currentPath="/" />
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-slate-200 bg-[#1B2A4A] py-20 text-white sm:py-28 lg:py-32">
+        {/* High-Converting Hero Section */}
+        <section className="relative overflow-hidden border-b border-slate-200 bg-[#1B2A4A] py-16 text-white sm:py-24 lg:py-28">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-200 backdrop-blur">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                Chartered Accountants &amp; Legal Tax Advisory
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Hero Column */}
+              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                  </span>
+                  ICAI Certified Chartered Accountants • Peer-Reviewed Firm
+                </div>
+
+                <h1 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.12]">
+                  Strategic Tax Optimization &amp; Corporate Advisory for High-Growth Enterprises
+                </h1>
+
+                <p className="text-base sm:text-lg leading-relaxed text-slate-300 max-w-2xl mx-auto lg:mx-0">
+                  From statutory audits and monthly GST/ITR filings to complex appellate tribunal representation — our Chartered Accountants deliver impenetrable compliance and maximum tax savings.
+                </p>
+
+                {/* Primary Dual CTAs */}
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  <Link href="/contact" className="w-full sm:w-auto">
+                    <Button
+                      size="xl"
+                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8"
+                    >
+                      Schedule Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-105"
+                  >
+                    <MessageCircle className="h-4 w-4 fill-white" /> WhatsApp a CA Partner
+                  </a>
+                </div>
+
+                {/* Hard Trust Pillars */}
+                <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300 font-medium">
+                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
+                    <ShieldCheck className="h-4 w-4 text-[#E8823A] shrink-0" />
+                    <span>100% ICAI Certified Partners</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
+                    <Lock className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <span>Bank-Grade 256-Bit Encrypted Vault</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
+                    <Clock className="h-4 w-4 text-[#C43D6B] shrink-0" />
+                    <span>15-Min Response SLA Guarantee</span>
+                  </div>
+                </div>
               </div>
 
-              <h1 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.15]">
-                Strategic Tax, Compliance &amp; Legal Advisory for High-Growth Enterprises
-              </h1>
+              {/* Right Hero Column: Interactive Tax Calculator Teaser Card */}
+              <div className="lg:col-span-5">
+                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-5">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
+                      <Sparkles className="h-4 w-4 text-emerald-300" /> Free Tax Estimator
+                    </span>
+                    <span className="text-[11px] text-slate-300">Budget 2024 / 2025 Slabs</span>
+                  </div>
 
-              <p className="text-base sm:text-lg leading-relaxed text-slate-300 max-w-2xl mx-auto">
-                From company incorporation and monthly GST/ITR filings to complex tribunal appeals and bankable project reports — our team of Chartered Accountants delivers dependable financial governance.
-              </p>
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-white font-display">
+                      Old vs New Regime Savings Calculator
+                    </h3>
+                    <p className="text-xs text-slate-300">
+                      Find out which regime saves you more taxes under Section 115BAC.
+                    </p>
+                  </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
-                <Link href="/contact" className="w-full sm:w-auto">
-                  <Button
-                    size="xl"
-                    className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-semibold shadow-lg"
-                  >
-                    Book a Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/services" className="w-full sm:w-auto">
-                  <Button
-                    size="xl"
-                    variant="outline"
-                    className="w-full sm:w-auto border-slate-500 text-white hover:bg-white/10"
-                  >
-                    Explore Practice Areas
-                  </Button>
-                </Link>
-              </div>
+                  <div className="rounded-2xl bg-black/30 p-4 border border-white/10 space-y-3">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-300">Average Salary Tax Savings:</span>
+                      <span className="font-mono text-emerald-400 font-extrabold text-sm">₹48,500</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-300">MSME Presumptive Tax Benefit:</span>
+                      <span className="font-mono text-emerald-400 font-extrabold text-sm">Up to 50% Flat</span>
+                    </div>
+                  </div>
 
-              {/* Badges */}
-              <div className="pt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-300 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="h-4 w-4 text-[#E8823A]" /> 100% ICAI Certified Partners
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Lock className="h-4 w-4 text-[#E8823A]" /> Bank-Grade 256-bit Portal Security
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4 text-[#E8823A]" /> 24-Hour Notice Turnaround
-                </span>
+                  <div className="space-y-2">
+                    <Link href="/calculators/income-tax-calculator" className="block">
+                      <Button className="w-full bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs py-3 shadow-md">
+                        <Calculator className="h-4 w-4 mr-2" /> Launch Full Tax Calculator &rarr;
+                      </Button>
+                    </Link>
+                    <Link href="/compliance-calendar" className="block">
+                      <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 text-xs">
+                        View August 2026 Compliance Calendar
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -165,15 +250,55 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Practice Areas / Services Grid */}
-        <section className="py-20 bg-white">
+        {/* Industry Vertical Solutions */}
+        <section className="py-20 bg-white border-b border-slate-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
-                Practice Areas
+                Tailored Industry Expertise
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                Comprehensive Corporate, Tax &amp; Advisory Solutions
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
+                Specialized Advisory for Every Growth Stage
+              </h2>
+              <p className="text-sm text-slate-600">
+                Whether you are a startup founder raising venture capital, an MSME managing working capital, or an NRI repatriating funds.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {industryVerticals.map((ind, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 space-y-3 hover:bg-white hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <span className="inline-block rounded bg-[#8B3FA8]/10 px-2.5 py-0.5 text-[10px] font-bold text-[#8B3FA8]">
+                      {ind.badge}
+                    </span>
+                    <h3 className="text-base font-bold text-slate-900">{ind.title}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">{ind.desc}</p>
+                  </div>
+                  <Link
+                    href="/contact"
+                    className="text-xs font-bold text-[#1B2A4A] hover:text-[#8B3FA8] flex items-center gap-1 pt-2"
+                  >
+                    Consult on this Sector &rarr;
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Practice Areas / Services Grid */}
+        <section className="py-20 bg-slate-50">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
+                Core Practice Areas
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
+                Comprehensive Corporate, Tax &amp; Audit Solutions
               </h2>
               <p className="text-sm text-slate-600">
                 End-to-end statutory services designed for founders, MSMEs, partnership firms, and growing private limited companies.
@@ -184,10 +309,10 @@ export default function HomePage(): JSX.Element {
               {serviceCategories.map((group, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
                 >
                   <div className="space-y-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-[#1B2A4A]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-[#1B2A4A]">
                       {idx === 0 && <Building className="h-5 w-5" />}
                       {idx === 1 && <FileText className="h-5 w-5" />}
                       {idx === 2 && <TrendingUp className="h-5 w-5" />}
@@ -195,7 +320,7 @@ export default function HomePage(): JSX.Element {
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-bold text-slate-900">
+                      <h3 className="text-lg font-bold text-slate-900 font-display">
                         {group.category}
                       </h3>
                       <p className="mt-1 text-xs text-slate-500 leading-relaxed">
@@ -233,7 +358,7 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* Appellate Tribunal & High Court Capability Highlight */}
-        <section className="py-16 bg-slate-900 text-white">
+        <section className="py-20 bg-slate-900 text-white">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 items-center">
               <div className="lg:col-span-8 space-y-4">
@@ -247,32 +372,35 @@ export default function HomePage(): JSX.Element {
                   {companyInfo.aboutExtended}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs text-slate-300">
-                  <div className="rounded-lg bg-slate-800/80 p-4 border border-slate-700">
+                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
                     <Scale className="h-5 w-5 text-[#8B3FA8] mb-2" />
                     <p className="font-bold text-white">ITAT &amp; High Court</p>
                     <p className="text-slate-400 mt-1">Direct tax appeal preparation and senior tribunal hearings.</p>
                   </div>
-                  <div className="rounded-lg bg-slate-800/80 p-4 border border-slate-700">
+                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
                     <FileCheck2 className="h-5 w-5 text-[#C43D6B] mb-2" />
                     <p className="font-bold text-white">GST Appellate Authority</p>
                     <p className="text-slate-400 mt-1">Show-cause notices, demand order appeals, and refund appeals.</p>
                   </div>
-                  <div className="rounded-lg bg-slate-800/80 p-4 border border-slate-700">
+                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
                     <Users2 className="h-5 w-5 text-[#E8823A] mb-2" />
-                    <p className="font-bold text-white">Advisory Council</p>
-                    <p className="text-slate-400 mt-1">Senior advocate consultation for high-stakes commercial disputes.</p>
+                    <p className="font-bold text-white">Senior Advisory Council</p>
+                    <p className="text-slate-400 mt-1">Advocate consultation for high-stakes commercial disputes.</p>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-4 rounded-2xl bg-white/5 p-6 border border-white/10 text-center space-y-4">
-                <h3 className="text-lg font-bold text-white">Have a Department Notice?</h3>
+              <div className="lg:col-span-4 rounded-3xl bg-white/5 p-8 border border-white/10 text-center space-y-4">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20 text-amber-300">
+                  <Scale className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-white font-display">Received a Tax or GST Notice?</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Time is critical. Department notices under Section 148, 143(2), or GST DRC-01 have strict 30-day statutory response windows.
+                  Section 148, 143(2), or GST DRC-01 notices have strict 30-day statutory response windows. Do not delay.
                 </p>
                 <Link href="/contact" className="block">
-                  <Button className="w-full bg-[#E8823A] text-white hover:bg-[#E8823A]/90 font-semibold">
-                    Submit Notice for Urgent Review
+                  <Button className="w-full bg-[#E8823A] text-white hover:bg-[#E8823A]/90 font-bold text-xs py-3">
+                    Submit Notice for Urgent CA Review
                   </Button>
                 </Link>
               </div>
@@ -281,13 +409,13 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* 3-Step Client Workflow */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-white">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
                 Streamlined Execution
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
                 How We Work With You
               </h2>
               <p className="text-sm text-slate-600">
@@ -297,11 +425,11 @@ export default function HomePage(): JSX.Element {
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {steps.map((st, i) => (
-                <div key={i} className="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-4">
+                <div key={i} className="relative rounded-3xl border border-slate-200 bg-slate-50/50 p-8 shadow-sm space-y-4">
                   <span className="font-mono text-3xl font-extrabold text-[#8B3FA8]/30">
                     {st.step}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900">{st.title}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 font-display">{st.title}</h3>
                   <p className="text-xs sm:text-sm leading-relaxed text-slate-600">
                     {st.desc}
                   </p>
@@ -312,20 +440,20 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white border-t border-slate-200">
+        <section className="py-20 bg-slate-50 border-t border-slate-200">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
-                Proven Client Satisfaction
+                Client Endorsements
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
                 Trusted by Founders, CFOs &amp; Enterprises
               </h2>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {testimonials.map((t, idx) => (
-                <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm flex flex-col justify-between space-y-4">
+                <div key={idx} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
                     <span className="inline-block rounded bg-[#8B3FA8]/10 px-2.5 py-0.5 text-[10px] font-semibold text-[#8B3FA8]">
                       {t.tag}
@@ -344,21 +472,32 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Bottom CTA Box */}
-        <section className="py-16 bg-[#1B2A4A] text-white">
-          <div className="container mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-6">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-display">
-              Ready to Simplify Your Tax &amp; Corporate Compliances?
+        {/* Bottom High-Impact Conversion CTA Box */}
+        <section className="py-20 bg-[#1B2A4A] text-white relative overflow-hidden">
+          <div className="container mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-6 relative z-10">
+            <span className="inline-block rounded-full bg-emerald-400/20 px-3.5 py-1 text-xs font-bold text-emerald-300 border border-emerald-400/30">
+              Immediate CA Consultation Available
+            </span>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-5xl font-display">
+              Ready to Lower Your Tax Burden &amp; Stay 100% Compliant?
             </h2>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
-              Schedule a one-on-one consultation with our Chartered Accountants today.
+            <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              Schedule a one-on-one session with our Chartered Accountants. We assess your financial position and provide tailored tax solutions.
             </p>
-            <div className="pt-2 flex justify-center">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/contact">
-                <Button size="xl" className="bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-semibold px-8 shadow-xl">
-                  Book a Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                <Button size="xl" className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-bold px-8 shadow-xl">
+                  Schedule Free CA Consultation <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-4 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all"
+              >
+                <MessageCircle className="h-5 w-5 fill-white" /> Chat Directly on WhatsApp
+              </a>
             </div>
           </div>
         </section>

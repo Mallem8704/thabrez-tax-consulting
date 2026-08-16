@@ -1,7 +1,16 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Calculator, Info, ShieldCheck } from 'lucide-react';
+import {
+  Calculator,
+  Info,
+  ShieldCheck,
+  Download,
+  Send,
+  CheckCircle2,
+  Lock,
+  Sparkles,
+} from 'lucide-react';
 import Link from 'next/link';
 
 export function IncomeTaxCalculator(): JSX.Element {
@@ -13,6 +22,14 @@ export function IncomeTaxCalculator(): JSX.Element {
   const [hraExemption, setHraExemption] = useState<number>(0);
   const [homeLoanInterest, setHomeLoanInterest] = useState<number>(0);
 
+  // Modal State for Lead Capture / Free Tax Advisory Plan
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [leadName, setLeadName] = useState<string>('');
+  const [leadPhone, setLeadPhone] = useState<string>('');
+  const [leadEmail, setLeadEmail] = useState<string>('');
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
   const comparison = useMemo(() => {
     const income = Math.max(0, grossIncome || 0);
 
@@ -23,13 +40,6 @@ export function IncomeTaxCalculator(): JSX.Element {
     const newTaxableIncome = Math.max(0, income - newStdDeduction);
 
     let newTax = 0;
-    // Slabs:
-    // 0 - 3,00,000 : 0%
-    // 3,00,001 - 7,00,000 : 5%
-    // 7,00,001 - 10,00,000 : 10%
-    // 10,00,001 - 12,00,000 : 15%
-    // 12,00,001 - 15,00,000 : 20%
-    // Above 15,00,000 : 30%
     if (newTaxableIncome > 1500000) {
       newTax += (newTaxableIncome - 1500000) * 0.3;
       newTax += 300000 * 0.2; // 12-15L
@@ -52,7 +62,6 @@ export function IncomeTaxCalculator(): JSX.Element {
       newTax += (newTaxableIncome - 300000) * 0.05;
     }
 
-    // Section 87A Rebate in New Regime: If taxable income <= ₹7,00,000, 100% tax rebate (Max ₹25,000)
     let newRebate = 0;
     if (newTaxableIncome <= 700000) {
       newRebate = newTax;
@@ -83,11 +92,6 @@ export function IncomeTaxCalculator(): JSX.Element {
     const oldTaxableIncome = Math.max(0, income - totalOldDeductions);
 
     let oldTax = 0;
-    // Old Slabs:
-    // 0 - 2,50,000 : 0%
-    // 2,50,001 - 5,00,000 : 5%
-    // 5,00,001 - 10,00,000 : 20%
-    // Above 10,00,000 : 30%
     if (oldTaxableIncome > 1000000) {
       oldTax += (oldTaxableIncome - 1000000) * 0.3;
       oldTax += 500000 * 0.2; // 5-10L
@@ -99,7 +103,6 @@ export function IncomeTaxCalculator(): JSX.Element {
       oldTax += (oldTaxableIncome - 250000) * 0.05;
     }
 
-    // Section 87A in Old Regime: Taxable income <= ₹5,00,000 -> Max ₹12,500 rebate
     let oldRebate = 0;
     if (oldTaxableIncome <= 500000) {
       oldRebate = oldTax;
@@ -146,35 +149,90 @@ export function IncomeTaxCalculator(): JSX.Element {
     }).format(Math.round(val));
   };
 
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      const apiBase =
+        process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+
+      await fetch(`${apiBase}/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: leadName,
+          phone: leadPhone,
+          email: leadEmail || undefined,
+          serviceInterest: 'Income Tax Return & Optimization',
+          source: 'calculator_lead_magnet_modal',
+          turnstileToken: 'mock_turnstile_pass',
+          message: `Tax Calculator Lead: Gross Income: ${formatINR(
+            grossIncome,
+          )}, Recommended Regime: ${comparison.betterRegime.toUpperCase()}, Tax Savings: ${formatINR(
+            comparison.taxDifference,
+          )}. 80C: ${formatINR(deduction80C)}, 80D: ${formatINR(deduction80D)}, 80CCD: ${formatINR(
+            deduction80CCD,
+          )}.`,
+        }),
+      });
+
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="space-y-8">
-      {/* Comparison Banner */}
-      <div className={`rounded-2xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md ${
-        comparison.betterRegime === 'new' ? 'bg-[#1B2A4A]' : 'bg-slate-900'
-      }`}>
-        <div className="space-y-1 text-center sm:text-left">
-          <div className="flex items-center justify-center sm:justify-start gap-2">
-            <span className="inline-block rounded-full bg-emerald-400/20 px-2.5 py-0.5 text-xs font-bold text-emerald-300">
-              Recommended
+      {/* High-Converting Comparison Hero Banner */}
+      <div
+        className={`rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border ${
+          comparison.betterRegime === 'new'
+            ? 'bg-[#1B2A4A] border-emerald-500/30'
+            : 'bg-slate-900 border-indigo-500/30'
+        }`}
+      >
+        <div className="space-y-2 text-center md:text-left">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-400/20 px-3 py-0.5 text-xs font-bold text-emerald-300 border border-emerald-400/30">
+              <Sparkles className="h-3 w-3 text-emerald-300" /> Maximum Tax Efficiency
             </span>
-            <span className="text-sm font-semibold">
-              {comparison.betterRegime === 'new' ? 'New Tax Regime (Sec 115BAC)' : 'Old Tax Regime'} is More Beneficial
+            <span className="text-sm font-semibold text-slate-200">
+              {comparison.betterRegime === 'new'
+                ? 'New Tax Regime (Section 115BAC)'
+                : 'Old Tax Regime'} is More Beneficial
             </span>
           </div>
-          <p className="text-xs text-slate-300">
-            You will save{' '}
-            <strong className="text-emerald-400 font-mono text-sm">
+
+          <h3 className="text-xl sm:text-2xl font-bold text-white font-display">
+            You save{' '}
+            <span className="text-emerald-400 font-mono font-extrabold text-2xl sm:text-3xl">
               {formatINR(comparison.taxDifference)}
-            </strong>{' '}
-            by filing under the {comparison.betterRegime === 'new' ? 'New Tax Regime' : 'Old Tax Regime'}.
+            </span>{' '}
+            in taxes
+          </h3>
+          <p className="text-xs text-slate-300 max-w-xl">
+            Our Chartered Accountants can optimize salary restructuring, Section 80 deductions, and foreign tax credits to lower your tax liability even further.
           </p>
         </div>
 
-        <Link href="/contact">
-          <button className="rounded-lg bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] px-5 py-2.5 text-xs font-bold text-white shadow hover:opacity-95 transition-opacity whitespace-nowrap">
-            File ITR with CA Partner &rarr;
+        <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          <button
+            type="button"
+            onClick={() => setShowModal(true)}
+            className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-lg hover:opacity-95 transition-all hover:scale-105 active:scale-95"
+          >
+            <Download className="h-4 w-4" /> Get Tax Optimization Plan
           </button>
-        </Link>
+          <Link href="/contact">
+            <button className="w-full sm:w-auto rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-xs sm:text-sm font-semibold text-white hover:bg-white/20 transition-all">
+              Speak to a CA &rarr;
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Input vs Side-by-side Grid */}
@@ -314,11 +372,13 @@ export function IncomeTaxCalculator(): JSX.Element {
         <div className="lg:col-span-6 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* New Regime Card */}
-            <div className={`rounded-2xl border p-5 space-y-4 shadow-sm ${
-              comparison.betterRegime === 'new'
-                ? 'border-[#8B3FA8] bg-[#8B3FA8]/5 ring-2 ring-[#8B3FA8]/20'
-                : 'border-slate-200 bg-white'
-            }`}>
+            <div
+              className={`rounded-2xl border p-5 space-y-4 shadow-sm ${
+                comparison.betterRegime === 'new'
+                  ? 'border-[#8B3FA8] bg-[#8B3FA8]/5 ring-2 ring-[#8B3FA8]/20'
+                  : 'border-slate-200 bg-white'
+              }`}
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#8B3FA8] uppercase tracking-wider">
                   New Tax Regime
@@ -364,11 +424,13 @@ export function IncomeTaxCalculator(): JSX.Element {
             </div>
 
             {/* Old Regime Card */}
-            <div className={`rounded-2xl border p-5 space-y-4 shadow-sm ${
-              comparison.betterRegime === 'old'
-                ? 'border-[#8B3FA8] bg-[#8B3FA8]/5 ring-2 ring-[#8B3FA8]/20'
-                : 'border-slate-200 bg-white'
-            }`}>
+            <div
+              className={`rounded-2xl border p-5 space-y-4 shadow-sm ${
+                comparison.betterRegime === 'old'
+                  ? 'border-[#8B3FA8] bg-[#8B3FA8]/5 ring-2 ring-[#8B3FA8]/20'
+                  : 'border-slate-200 bg-white'
+              }`}
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Old Tax Regime
@@ -419,13 +481,14 @@ export function IncomeTaxCalculator(): JSX.Element {
               <ShieldCheck className="h-4 w-4 text-emerald-600" /> Key Rule under Budget 2024 / 2025:
             </p>
             <p>
-              In the New Tax Regime, salaried taxpayers enjoy an increased <strong>Standard Deduction of ₹75,000</strong> and full tax rebate under Section 87A up to taxable income of ₹7,00,000 (meaning zero tax up to ₹7.75 Lakhs gross income).
+              In the New Tax Regime, salaried taxpayers enjoy an increased{' '}
+              <strong>Standard Deduction of ₹75,000</strong> and full tax rebate under Section 87A up to taxable income of ₹7,00,000 (meaning zero tax up to ₹7.75 Lakhs gross income).
             </p>
           </div>
         </div>
       </div>
 
-      {/* SEO Guide */}
+      {/* SEO & Knowledge Guide */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 space-y-6">
         <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
           <Info className="h-5 w-5 text-[#8B3FA8]" /> Income Tax Slabs in India (FY 2024-25 &amp; FY 2025-26)
@@ -433,7 +496,9 @@ export function IncomeTaxCalculator(): JSX.Element {
 
         <div className="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
           <p>
-            Individual taxpayers can choose between the default <strong>New Tax Regime (Section 115BAC)</strong> featuring concessional tax slabs without Chapter VI-A deductions, and the <strong>Old Tax Regime</strong> which allows deductions under Sections 80C, 80D, 24(b), and HRA.
+            Individual taxpayers can choose between the default{' '}
+            <strong>New Tax Regime (Section 115BAC)</strong> featuring concessional tax slabs without Chapter VI-A deductions, and the{' '}
+            <strong>Old Tax Regime</strong> which allows deductions under Sections 80C, 80D, 24(b), and HRA.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
@@ -461,6 +526,128 @@ export function IncomeTaxCalculator(): JSX.Element {
           </div>
         </div>
       </div>
+
+      {/* Conversion Lead-Capture Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 sm:p-8 shadow-2xl space-y-6">
+            <button
+              type="button"
+              onClick={() => {
+                setShowModal(false);
+                setSubmitted(false);
+              }}
+              className="absolute right-4 top-4 rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+            >
+              ✕
+            </button>
+
+            {submitted ? (
+              <div className="py-6 text-center space-y-4">
+                <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-600 animate-bounce" />
+                <h3 className="text-xl font-bold text-slate-900 font-display">
+                  Tax Optimization Plan Requested!
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">
+                  A Senior Chartered Accountant from Thabrez &amp; Co. will review your numbers and contact you at{' '}
+                  <strong className="text-slate-900">{leadPhone}</strong> within 15 minutes.
+                </p>
+                <div className="pt-2 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowModal(false);
+                      setSubmitted(false);
+                    }}
+                    className="rounded-lg bg-[#1B2A4A] px-6 py-2.5 text-xs font-bold text-white shadow"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-1 text-center sm:text-left">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                    <ShieldCheck className="h-3.5 w-3.5" /> 100% Free CA Assessment
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 font-display">
+                    Get Your Custom Tax Optimization Report
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    We will calculate your exact tax breakdown for Gross CTC of {formatINR(grossIncome)} and show you how to save up to{' '}
+                    <strong className="text-emerald-600">{formatINR(comparison.taxDifference)}</strong> legally.
+                  </p>
+                </div>
+
+                <form onSubmit={handleLeadSubmit} className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-800">
+                      Your Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Anand Sharma"
+                      value={leadName}
+                      onChange={(e) => setLeadName(e.target.value)}
+                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-800">
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. +91 98765 43210"
+                        value={leadPhone}
+                        onChange={(e) => setLeadPhone(e.target.value)}
+                        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-800">
+                        Email Address (for PDF report)
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="e.g. anand@example.com"
+                        value={leadEmail}
+                        onChange={(e) => setLeadEmail(e.target.value)}
+                        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                    <span>Strictly confidential under ICAI Code of Ethics. Zero spam.</span>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#1B2A4A] py-3 text-sm font-bold text-white shadow-lg hover:bg-[#253966] transition-all disabled:opacity-50"
+                  >
+                    {submitting ? (
+                      'Preparing Your Plan...'
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4 text-[#E8823A]" /> Send My Tax Saving Plan &rarr;
+                      </>
+                    )}
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

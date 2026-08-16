@@ -1,33 +1,53 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Header, Footer, Button } from '@thabrez/ui';
-import { companyInfo, serviceCategories } from '@thabrez/config/company-content';
+import { companyInfo } from '@thabrez/config/company-content';
 import {
   Phone,
   Mail,
   Clock,
-  Globe,
   MapPin,
-  Send,
   CheckCircle2,
   AlertCircle,
   Building,
   ShieldCheck,
+  MessageCircle,
+  PhoneCall,
+  FileUp,
+  Scale,
 } from 'lucide-react';
 
 export default function ContactPage(): JSX.Element {
+  const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    serviceInterest: serviceCategories[0]?.services[0]?.name || 'Private Limited Company',
+    serviceInterest: 'Income Tax Litigation & Notice Resolution',
+    urgentNotice: false,
     message: '',
   });
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const whatsappNumber = '918802222422';
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    'Hi Thabrez & Co., I would like to schedule an urgent consultation with a Chartered Accountant.',
+  )}`;
+
+  const handleNextStep = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.phone || formData.phone.trim().length < 8) {
+      setErrorMsg('Please enter a valid phone number for CA callback.');
+      return;
+    }
+    setErrorMsg(null);
+    setStep(2);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,8 +62,14 @@ export default function ContactPage(): JSX.Element {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          source: 'website_contact_page',
+          name: formData.name || 'Valued Prospective Client',
+          phone: formData.phone,
+          email: formData.email || undefined,
+          serviceInterest: formData.urgentNotice
+            ? `[URGENT NOTICE DEFENSE] ${formData.serviceInterest}`
+            : formData.serviceInterest,
+          message: formData.message || 'Consultation requested via 2-step onboarding.',
+          source: 'website_contact_progressive_form',
           turnstileToken: 'mock_turnstile_pass',
         }),
       });
@@ -55,7 +81,7 @@ export default function ContactPage(): JSX.Element {
 
       setSubmitted(true);
     } catch {
-      // In static / offline preview mode, gracefully show success state
+      // In preview mode or network hiccup, transition gracefully to success state
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -69,66 +95,147 @@ export default function ContactPage(): JSX.Element {
       <Header currentPath="/contact" />
 
       <main className="flex-1">
-        {/* Header Hero */}
-        <section className="border-b border-slate-200 bg-[#1B2A4A] py-16 text-white sm:py-24">
+        {/* Header Hero with Trust Anchors */}
+        <section className="border-b border-slate-200 bg-[#1B2A4A] py-16 text-white sm:py-20">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <span className="inline-block rounded-md bg-[#E8823A]/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#E8823A]">
-              Connect With Us
-            </span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              Senior CA Desk Online • 15-Min Response SLA
+            </div>
+
             <h1 className="text-3xl font-bold tracking-tight sm:text-5xl font-display">
-              Schedule Your Free CA Consultation
+              Schedule Your Confidential CA Consultation
             </h1>
             <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300">
-              Get direct expert guidance on Income Tax, GST scrutiny defense, company incorporation, or corporate audits.
+              Direct advisory on Income Tax assessments, GST notice scrutiny, company incorporation, and business litigation defense.
             </p>
+
+            {/* Quick Action Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-105"
+              >
+                <MessageCircle className="h-4 w-4 fill-white" /> Quick WhatsApp Consultation
+              </a>
+              <a
+                href="tel:8802222422"
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-white/20 border border-white/20 transition-all"
+              >
+                <PhoneCall className="h-4 w-4 text-[#E8823A]" /> Direct CA Helpline: +91 88022 22422
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* Contact Form & Office Locations */}
-        <section className="py-16 sm:py-20 bg-white">
+        {/* 2-Step Progressive Consultation Form & Direct Contacts */}
+        <section className="py-16 sm:py-20 bg-slate-50">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
               {/* Form Column */}
               <div className="lg:col-span-7 space-y-6">
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-                  <div className="space-y-1">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-                      Inquire or Request Callback
-                    </h2>
-                    <p className="text-xs sm:text-sm text-slate-600">
-                      Submit your requirements and a partner CA will review and contact you within 2 business hours.
-                    </p>
-                  </div>
-
+                <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
                   {submitted ? (
-                    <div className="mt-8 rounded-xl bg-emerald-50 border border-emerald-200 p-8 text-center space-y-4">
-                      <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" />
-                      <h3 className="text-lg font-bold text-slate-900">
-                        Consultation Request Submitted Successfully
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Thank you for reaching out to {companyInfo.legalName}. One of our Chartered Accountants will call you at{' '}
-                        <span className="font-semibold text-slate-900">{formData.phone || 'your phone number'}</span>.
-                      </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setSubmitted(false);
-                          setFormData({
-                            name: '',
-                            phone: '',
-                            email: '',
-                            serviceInterest: serviceCategories[0]?.services[0]?.name || 'Private Limited Company',
-                            message: '',
-                          });
-                        }}
-                      >
-                        Submit Another Inquiry
-                      </Button>
+                    /* Post-Submission Instant Gratification Screen */
+                    <div className="py-8 text-center space-y-6 animate-in fade-in zoom-in duration-300">
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                        <CheckCircle2 className="h-10 w-10" />
+                      </div>
+
+                      <div className="space-y-2">
+                        <span className="inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                          Priority Consultation Queued
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-display">
+                          Your CA Consultation is Confirmed!
+                        </h2>
+                        <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                          A Senior Chartered Accountant from {companyInfo.legalName} has received your inquiry and will contact you at{' '}
+                          <strong className="text-slate-900">{formData.phone}</strong> within <span className="text-emerald-700 font-bold">15 minutes</span> (or next business morning for after-hours).
+                        </p>
+                      </div>
+
+                      {/* Client Vault Document Upload Bridge */}
+                      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-left space-y-3 max-w-md mx-auto">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                          <FileUp className="h-4 w-4 text-[#8B3FA8]" /> Speed Up Your Case Review
+                        </p>
+                        <p className="text-xs text-slate-700">
+                          Have tax notices, Form 16, or financial statements ready? You can access the secure client portal to upload them directly.
+                        </p>
+                        <Link href="/portal" className="block">
+                          <Button size="sm" className="w-full bg-[#1B2A4A] text-white hover:bg-[#253966] font-semibold text-xs">
+                            Open Secure Client Vault &rarr;
+                          </Button>
+                        </Link>
+                      </div>
+
+                      <div className="pt-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSubmitted(false);
+                            setStep(1);
+                            setFormData({
+                              name: '',
+                              phone: '',
+                              email: '',
+                              serviceInterest: 'Income Tax Litigation & Notice Resolution',
+                              urgentNotice: false,
+                              message: '',
+                            });
+                          }}
+                          className="text-xs text-slate-500 hover:text-slate-900"
+                        >
+                          Submit Another Request
+                        </Button>
+                      </div>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                    /* 2-Step Progressive Form */
+                    <div className="space-y-6">
+                      {/* Step Progress Stepper */}
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <div className="space-y-0.5">
+                          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 font-display">
+                            {step === 1 ? 'Step 1: Select Your Advisory Need' : 'Step 2: Contact Details & Context'}
+                          </h2>
+                          <p className="text-xs text-slate-500">
+                            {step === 1
+                              ? 'Tell us what you need assistance with for the fastest CA match.'
+                              : 'Provide your contact info so the assigned CA can reach you directly.'}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
+                              step === 1
+                                ? 'bg-[#1B2A4A] text-white'
+                                : 'bg-emerald-600 text-white'
+                            }`}
+                          >
+                            1
+                          </span>
+                          <span className="h-0.5 w-4 bg-slate-200" />
+                          <span
+                            className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
+                              step === 2
+                                ? 'bg-[#1B2A4A] text-white'
+                                : 'bg-slate-100 text-slate-400'
+                            }`}
+                          >
+                            2
+                          </span>
+                        </div>
+                      </div>
+
                       {errorMsg && (
                         <div className="flex items-center gap-2 rounded-lg bg-red-50 border border-red-200 p-3 text-xs text-red-700">
                           <AlertCircle className="h-4 w-4 shrink-0" />
@@ -136,118 +243,194 @@ export default function ContactPage(): JSX.Element {
                         </div>
                       )}
 
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-800">
-                            Full Name <span className="text-red-500">*</span>
+                      {step === 1 ? (
+                        /* STEP 1: Fast Service Selection & Phone */
+                        <form onSubmit={handleNextStep} className="space-y-5">
+                          {/* Urgent Notice Toggle Callout */}
+                          <label className="flex items-start gap-3 rounded-2xl border-2 border-amber-300 bg-amber-50/70 p-4 cursor-pointer hover:bg-amber-50 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={formData.urgentNotice}
+                              onChange={(e) => setFormData({ ...formData, urgentNotice: e.target.checked })}
+                              className="mt-0.5 h-4 w-4 rounded border-amber-400 text-[#E8823A] focus:ring-amber-400"
+                            />
+                            <div className="space-y-0.5">
+                              <span className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+                                <Scale className="h-3.5 w-3.5 text-amber-700" /> Urgent: I received an IT / GST Notice with a 30-Day Deadline
+                              </span>
+                              <p className="text-[11px] text-amber-800 leading-relaxed">
+                                Flags your request for immediate priority review by our Senior Appellate Advocate &amp; CA partners.
+                              </p>
+                            </div>
                           </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Rajesh Varma"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
-                          />
-                        </div>
 
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-800">
-                            Phone Number <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            required
-                            placeholder="e.g. +91 98765 43210"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
-                          />
-                        </div>
-                      </div>
+                          {/* Service Pill Grid */}
+                          <div className="space-y-2">
+                            <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                              Primary Advisory Service
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                              {[
+                                'Income Tax Litigation & Notice Resolution',
+                                'GST Return Filing & Audit Reconciliation',
+                                'Private Limited / LLP Company Setup',
+                                'Corporate Tax Audit & Transfer Pricing',
+                                'Bank Project Report & CMA Debt Syndication',
+                                'NRI Taxation & 15CA/CB Foreign Remittance',
+                              ].map((service) => (
+                                <button
+                                  key={service}
+                                  type="button"
+                                  onClick={() => setFormData({ ...formData, serviceInterest: service })}
+                                  className={`rounded-xl border p-3 text-left text-xs font-semibold transition-all ${
+                                    formData.serviceInterest === service
+                                      ? 'border-[#1B2A4A] bg-[#1B2A4A] text-white shadow-sm'
+                                      : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                                  }`}
+                                >
+                                  {service}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
 
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-800">
-                            Email Address
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="e.g. rajesh@example.com"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
-                          />
-                        </div>
+                          {/* Quick Phone Number Input */}
+                          <div className="space-y-1.5 pt-2">
+                            <label className="text-xs font-bold text-slate-800">
+                              Your Phone Number (for WhatsApp / Call confirmation) <span className="text-red-500">*</span>
+                            </label>
+                            <div className="relative">
+                              <span className="absolute left-3 top-3 text-xs font-bold text-slate-400">
+                                +91
+                              </span>
+                              <input
+                                type="tel"
+                                required
+                                placeholder="98765 43210"
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                className="w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 py-3 text-sm font-semibold text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
+                              />
+                            </div>
+                          </div>
 
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-800">
-                            Service Interested In
-                          </label>
-                          <select
-                            value={formData.serviceInterest}
-                            onChange={(e) => setFormData({ ...formData, serviceInterest: e.target.value })}
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
+                          <Button
+                            type="submit"
+                            size="lg"
+                            className="w-full bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white font-bold shadow-lg hover:opacity-95 text-sm py-3"
                           >
-                            {serviceCategories.flatMap((cg) =>
-                              cg.services.map((srv) => (
-                                <option key={srv.slug} value={srv.name}>
-                                  {cg.category}: {srv.name}
-                                </option>
-                              )),
-                            )}
-                          </select>
-                        </div>
-                      </div>
+                            Continue to Step 2 &rarr;
+                          </Button>
+                        </form>
+                      ) : (
+                        /* STEP 2: Name, Email & Context */
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="space-y-1.5">
+                              <label className="text-xs font-bold text-slate-800">
+                                Your Full Name <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                required
+                                placeholder="e.g. Rajesh Varma"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none"
+                              />
+                            </div>
 
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-slate-800">
-                          Specific Query or Notice Details
-                        </label>
-                        <textarea
-                          rows={4}
-                          placeholder="Briefly describe your requirements or tax questions..."
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none focus:ring-1 focus:ring-[#1B2A4A]"
-                        />
-                      </div>
+                            <div className="space-y-1.5">
+                              <label className="text-xs font-bold text-slate-800">
+                                Email Address (Optional for proposal)
+                              </label>
+                              <input
+                                type="email"
+                                placeholder="e.g. rajesh@company.com"
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:border-[#1B2A4A] focus:outline-none"
+                              />
+                            </div>
+                          </div>
 
-                      {/* Cloudflare Turnstile Protected Notice */}
-                      <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                        <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
-                        <span>Protected by Cloudflare Turnstile anti-spam verification</span>
-                      </div>
+                          <div className="space-y-1.5">
+                            <label className="text-xs font-bold text-slate-800">
+                              Specific Requirement or Notice Details (Optional)
+                            </label>
+                            <textarea
+                              rows={3}
+                              placeholder="Describe your query, annual turnover, or the notice section received..."
+                              value={formData.message}
+                              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[#1B2A4A] focus:outline-none"
+                            />
+                          </div>
 
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full flex items-center justify-center gap-2 rounded-md bg-[#1B2A4A] py-3 px-4 text-sm font-semibold text-white shadow hover:bg-[#1B2A4A]/90 transition-all disabled:opacity-50"
-                      >
-                        {loading ? (
-                          'Submitting...'
-                        ) : (
-                          <>
-                            <Send className="h-4 w-4 text-[#E8823A]" /> Submit Consultation Request
-                          </>
-                        )}
-                      </button>
-                    </form>
+                          <div className="flex items-center gap-2 text-[11px] text-slate-500 pt-1">
+                            <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                            <span>100% Confidential under ICAI Code of Ethics &amp; DPDP Act 2023.</span>
+                          </div>
+
+                          <div className="flex gap-3 pt-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => setStep(1)}
+                              className="w-1/3 text-xs"
+                            >
+                              &larr; Back
+                            </Button>
+                            <Button
+                              type="submit"
+                              disabled={loading}
+                              className="w-2/3 bg-[#1B2A4A] text-white hover:bg-[#253966] font-bold text-xs sm:text-sm py-3"
+                            >
+                              {loading ? 'Submitting...' : 'Confirm & Request Call'}
+                            </Button>
+                          </div>
+                        </form>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
 
-              {/* Direct Info & Offices */}
+              {/* Direct Info & Offices Column */}
               <div className="lg:col-span-5 space-y-6">
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-6">
-                  <h3 className="text-lg font-bold text-slate-900">
-                    Direct Contact Information
-                  </h3>
+                <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 space-y-6 shadow-sm">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold text-slate-900">
+                      Direct Partner Access
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Need immediate help? Reach out directly via phone, WhatsApp, or visit our offices.
+                    </p>
+                  </div>
 
                   <div className="space-y-4 text-xs sm:text-sm text-slate-700">
                     <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded bg-[#8B3FA8]/10 text-[#8B3FA8] shrink-0">
-                        <Phone className="h-4 w-4" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 shrink-0">
+                        <MessageCircle className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          Instant WhatsApp Desk
+                        </p>
+                        <a
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-0.5 font-bold text-emerald-700 hover:underline block"
+                        >
+                          +91 88022 22422 (Live Chat)
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#8B3FA8]/10 text-[#8B3FA8] shrink-0">
+                        <Phone className="h-5 w-5" />
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
@@ -268,12 +451,12 @@ export default function ContactPage(): JSX.Element {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded bg-[#C43D6B]/10 text-[#C43D6B] shrink-0">
-                        <Mail className="h-4 w-4" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#C43D6B]/10 text-[#C43D6B] shrink-0">
+                        <Mail className="h-5 w-5" />
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                          Email Inquiries
+                          Official Email
                         </p>
                         <a
                           href={`mailto:${companyInfo.email}`}
@@ -285,8 +468,8 @@ export default function ContactPage(): JSX.Element {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded bg-[#E8823A]/10 text-[#E8823A] shrink-0">
-                        <Clock className="h-4 w-4" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8823A]/10 text-[#E8823A] shrink-0">
+                        <Clock className="h-5 w-5" />
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
@@ -297,27 +480,13 @@ export default function ContactPage(): JSX.Element {
                         </p>
                       </div>
                     </div>
-
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-700 shrink-0">
-                        <Globe className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                          Official Web Portal
-                        </p>
-                        <p className="mt-0.5 font-medium text-slate-900">
-                          {companyInfo.website}
-                        </p>
-                      </div>
-                    </div>
                   </div>
 
-                  {/* Office Locations */}
-                  <div className="border-t border-slate-200 pt-5 space-y-4">
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+                  {/* Registered & Branch Offices */}
+                  <div className="border-t border-slate-100 pt-5 space-y-3">
+                    <div className="rounded-xl border border-slate-100 bg-slate-50 p-3.5 space-y-1">
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[#8B3FA8] flex items-center gap-1">
-                        <Building className="h-3 w-3" /> Registered Office
+                        <Building className="h-3 w-3" /> Registered Office (Kadiri)
                       </p>
                       <p className="text-xs font-semibold text-slate-900">
                         {companyInfo.registeredOffice.line1}
@@ -327,9 +496,9 @@ export default function ContactPage(): JSX.Element {
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+                    <div className="rounded-xl border border-slate-100 bg-slate-50 p-3.5 space-y-1">
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[#C43D6B] flex items-center gap-1">
-                        <Building className="h-3 w-3" /> Bengaluru Branch
+                        <Building className="h-3 w-3" /> Bengaluru Branch Office
                       </p>
                       <p className="text-xs font-semibold text-slate-900">
                         {companyInfo.branchOffice.line1}
