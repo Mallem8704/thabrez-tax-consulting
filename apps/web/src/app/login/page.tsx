@@ -16,7 +16,7 @@ import {
   Label,
   Badge,
 } from '@thabrez/ui';
-import { Lock, Mail, AlertCircle, ArrowRight, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Lock, Mail, AlertCircle, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 function LoginContent(): JSX.Element {
   const router = useRouter();

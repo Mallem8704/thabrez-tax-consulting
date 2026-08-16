@@ -30,28 +30,28 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/98 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all font-sans">
-      {/* Top Authority Micro-Bar */}
-      <div className="border-b border-slate-800/20 bg-[#1B2A4A] py-2.5 text-slate-100 text-xs hidden lg:block">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-slate-200 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.06)] font-sans select-none">
+      {/* Top Institutional Micro Bar */}
+      <div className="border-b border-slate-900/10 bg-[#1B2A4A] py-2 text-slate-100 text-xs hidden lg:block">
         <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3.5">
-            <span className="inline-flex items-center gap-1.5 font-semibold text-white tracking-wide">
-              <ShieldCheck className="h-4 w-4 text-[#E8823A]" />
+          <div className="flex items-center gap-3 text-[12px]">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-white">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#E8823A]" />
               Official Chartered Accountants &amp; Legal Tax Advisory
             </span>
             <span className="text-slate-500">•</span>
             <span className="text-slate-300">Offices in Bengaluru &amp; Kadiri</span>
             <span className="text-slate-500">•</span>
-            <span className="text-[#E8823A] font-bold flex items-center gap-1.5 bg-[#E8823A]/10 px-2 py-0.5 rounded">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[#E8823A] font-bold inline-flex items-center gap-1 bg-[#E8823A]/15 px-2 py-0.5 rounded text-[11px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Direct Partner Desk
             </span>
           </div>
 
-          <div className="flex items-center gap-5 font-mono text-xs">
+          <div className="flex items-center gap-4 font-mono text-[12px]">
             <span className="flex items-center gap-1.5 text-slate-200">
-              <Phone className="h-3.5 w-3.5 text-[#E8823A]" />
-              <span className="text-slate-300">CA Helpline:</span>
+              <Phone className="h-3 w-3 text-[#E8823A]" />
+              <span className="text-slate-400 font-sans">CA Helpline:</span>
               <a href="tel:8802222422" className="font-bold text-white hover:text-[#E8823A] transition-colors">
                 +91 880-2222-422
               </a>
@@ -65,23 +65,23 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
       </div>
 
       {/* Main Navbar */}
-      <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Logo */}
-        <a href="/" className="flex items-center group transition-transform hover:scale-[0.99] focus:outline-none shrink-0 mr-6">
+      <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 bg-white">
+        {/* Brand Logo Lockup */}
+        <a href="/" className="flex items-center group transition-transform hover:scale-[0.99] focus:outline-none shrink-0 mr-4">
           <BrandLogo size="md" variant="light" />
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-1.5 xl:gap-2.5 lg:flex">
+        <nav className="hidden items-center gap-1 xl:gap-2 lg:flex">
           {navLinks.map((link) => {
             const isActive = currentPath === link.href;
             return (
               <a
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 text-sm font-semibold transition-all rounded-lg whitespace-nowrap ${
+                className={`relative px-3 py-2 text-[13.5px] font-semibold transition-all rounded-lg whitespace-nowrap ${
                   isActive
-                    ? 'text-[#1B2A4A] bg-slate-100/90 font-bold'
+                    ? 'text-[#1B2A4A] bg-slate-100 font-bold'
                     : 'text-slate-700 hover:text-[#1B2A4A] hover:bg-slate-50'
                 }`}
               >
@@ -98,9 +98,9 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
         <div className="hidden items-center gap-3 lg:flex shrink-0 ml-4 pl-4 border-l border-slate-200">
           <a
             href="/login"
-            className="inline-flex items-center gap-1.5 h-10 px-4 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 text-xs font-bold shadow-2xs transition-all whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 h-10 px-4 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 hover:text-slate-950 text-xs font-bold shadow-2xs transition-all whitespace-nowrap"
           >
-            <Lock className="h-3.5 w-3.5 text-slate-500" />
+            <Lock className="h-3.5 w-3.5 text-[#8B3FA8]" />
             <span>Client Portal</span>
           </a>
 
@@ -150,9 +150,9 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
             <a
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center gap-2 h-11 w-full rounded-lg border border-slate-300 bg-white text-slate-700 font-bold text-xs shadow-2xs hover:bg-slate-50"
+              className="inline-flex items-center justify-center gap-2 h-11 w-full rounded-lg border border-slate-300 bg-white text-slate-800 font-bold text-xs shadow-2xs hover:bg-slate-50"
             >
-              <Lock className="h-4 w-4 text-slate-500" />
+              <Lock className="h-4 w-4 text-[#8B3FA8]" />
               <span>Client Portal Vault</span>
             </a>
 

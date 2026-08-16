@@ -2,28 +2,23 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@thabrez/ui';
 import { Header, Footer } from '@thabrez/ui';
-import { companyInfo, serviceCategories } from '@thabrez/config/company-content';
+import { serviceCategories } from '@thabrez/config/company-content';
 import {
   ShieldCheck,
-  Scale,
-  Award,
   ArrowRight,
-  FileText,
   Clock,
   Lock,
-  Building,
-  TrendingUp,
-  FileCheck2,
-  Users2,
   MessageCircle,
   Sparkles,
   Calculator,
+  CheckCircle2,
+  Calendar,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Thabrez Tax Consulting — Premier Chartered Accountants in India',
   description:
-    'Premier Chartered Accountancy and tax consulting firm. Specialized in Income Tax litigation, GST advisory, company incorporation, and banking project reports.',
+    'Premier Chartered Accountancy and corporate advisory firm. Specialized in Income Tax litigation, GST advisory, company incorporation, and banking project reports.',
   keywords: [
     'Chartered Accountant India',
     'GST Registration Kadiri',
@@ -120,29 +115,33 @@ export default function HomePage(): JSX.Element {
   )}`;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-[#8B3FA8] selection:text-white">
+    <div className="flex min-h-screen flex-col bg-background font-sans selection:bg-[#8B3FA8] selection:text-white">
       <Header currentPath="/" />
 
       <main className="flex-1">
         {/* High-Converting Hero Section */}
-        <section className="relative overflow-hidden border-b border-slate-200 bg-[#1B2A4A] py-16 text-white sm:py-24 lg:py-28">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#16233E] via-[#1B2A4A] to-[#121B30] pt-16 pb-20 text-white sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 border-b border-slate-800/60">
+          {/* Subtle Ambient Glow */}
+          <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#8B3FA8]/15 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#E8823A]/10 blur-3xl pointer-events-none" />
+
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Left Hero Column */}
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur">
+              <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
                   </span>
-                  ICAI Certified Chartered Accountants • Peer-Reviewed Firm
+                  ICAI Certified Chartered Accountants &bull; Peer-Reviewed Firm
                 </div>
 
-                <h1 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.12]">
+                <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.14] text-white">
                   Strategic Tax Optimization &amp; Corporate Advisory for High-Growth Enterprises
                 </h1>
 
-                <p className="text-base sm:text-lg leading-relaxed text-slate-300 max-w-2xl mx-auto lg:mx-0">
+                <p className="text-base sm:text-lg leading-relaxed text-slate-200 max-w-2xl mx-auto lg:mx-0 font-normal">
                   From statutory audits and monthly GST/ITR filings to complex appellate tribunal representation — our Chartered Accountants deliver impenetrable compliance and maximum tax savings.
                 </p>
 
@@ -151,7 +150,7 @@ export default function HomePage(): JSX.Element {
                   <Link href="/contact" className="w-full sm:w-auto">
                     <Button
                       size="xl"
-                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8"
+                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-xl px-8 h-12 rounded-xl text-sm"
                     >
                       Schedule Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -161,24 +160,24 @@ export default function HomePage(): JSX.Element {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-105"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 h-12 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-[1.02]"
                   >
                     <MessageCircle className="h-4 w-4 fill-white" /> WhatsApp a CA Partner
                   </a>
                 </div>
 
                 {/* Hard Trust Pillars */}
-                <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300 font-medium">
-                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
+                <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-200 font-semibold">
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
                     <ShieldCheck className="h-4 w-4 text-[#E8823A] shrink-0" />
                     <span>100% ICAI Certified Partners</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
                     <Lock className="h-4 w-4 text-emerald-400 shrink-0" />
                     <span>Bank-Grade 256-Bit Encrypted Vault</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 border border-white/10">
-                    <Clock className="h-4 w-4 text-[#C43D6B] shrink-0" />
+                  <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur-sm shadow-sm">
+                    <Clock className="h-4 w-4 text-[#E8823A] shrink-0" />
                     <span>15-Min Response SLA Guarantee</span>
                   </div>
                 </div>
@@ -186,15 +185,15 @@ export default function HomePage(): JSX.Element {
 
               {/* Right Hero Column: Interactive Tax Calculator Teaser Card */}
               <div className="lg:col-span-5">
-                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-5">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div className="rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+                  <div className="flex items-center justify-between border-b border-white/15 pb-3.5">
                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
                       <Sparkles className="h-4 w-4 text-emerald-300" /> Free Tax Estimator
                     </span>
-                    <span className="text-[11px] text-slate-300">Budget 2024 / 2025 Slabs</span>
+                    <span className="text-[11px] font-mono text-slate-300">Budget 2024 / 2025 Slabs</span>
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <h3 className="text-xl font-bold text-white font-display">
                       Old vs New Regime Savings Calculator
                     </h3>
@@ -203,27 +202,36 @@ export default function HomePage(): JSX.Element {
                     </p>
                   </div>
 
-                  <div className="rounded-2xl bg-black/30 p-4 border border-white/10 space-y-3">
+                  <div className="rounded-2xl bg-black/40 p-4 border border-white/10 space-y-3">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-300">Average Salary Tax Savings:</span>
-                      <span className="font-mono text-emerald-400 font-extrabold text-sm">₹48,500</span>
+                      <span className="text-slate-300 font-medium">Average Salary Tax Savings:</span>
+                      <span className="font-mono text-emerald-400 font-extrabold text-base">₹48,500</span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-300">MSME Presumptive Tax Benefit:</span>
-                      <span className="font-mono text-emerald-400 font-extrabold text-sm">Up to 50% Flat</span>
+                      <span className="text-slate-300 font-medium">MSME Presumptive Tax Benefit:</span>
+                      <span className="font-mono text-emerald-400 font-extrabold text-base">Up to 50% Flat</span>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     <Link href="/calculators/income-tax-calculator" className="block">
-                      <Button className="w-full bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs py-3 shadow-md">
-                        <Calculator className="h-4 w-4 mr-2" /> Launch Full Tax Calculator &rarr;
-                      </Button>
+                      <button
+                        type="button"
+                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs shadow-md transition-all"
+                      >
+                        <Calculator className="h-4 w-4" />
+                        <span>Launch Full Tax Calculator &rarr;</span>
+                      </button>
                     </Link>
+
                     <Link href="/compliance-calendar" className="block">
-                      <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 text-xs">
-                        View August 2026 Compliance Calendar
-                      </Button>
+                      <button
+                        type="button"
+                        className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-all"
+                      >
+                        <Calendar className="h-3.5 w-3.5 text-[#E8823A]" />
+                        <span>View 2025-26 Compliance Calendar</span>
+                      </button>
                     </Link>
                   </div>
                 </div>
@@ -233,15 +241,15 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* Stats Grid */}
-        <section className="border-b border-slate-200 bg-slate-50 py-10">
+        <section className="border-b border-slate-200 bg-white py-12">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 text-center">
+            <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
               {stats.map((stat, i) => (
-                <div key={i} className="space-y-1">
+                <div key={i} className="space-y-1 py-2">
                   <p className="font-mono text-3xl font-extrabold text-[#1B2A4A] sm:text-4xl">
                     {stat.value}
                   </p>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                     {stat.label}
                   </p>
                 </div>
@@ -251,38 +259,85 @@ export default function HomePage(): JSX.Element {
         </section>
 
         {/* Industry Vertical Solutions */}
-        <section className="py-20 bg-white border-b border-slate-100">
+        <section className="py-20 bg-slate-50 border-b border-slate-200/80">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
                 Tailored Industry Expertise
               </span>
               <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
-                Specialized Advisory for Every Growth Stage
+                Specialized Solutions for Every Growth Stage
               </h2>
               <p className="text-sm text-slate-600">
-                Whether you are a startup founder raising venture capital, an MSME managing working capital, or an NRI repatriating funds.
+                Industry-specific tax structuring and regulatory defense designed by experienced partners.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {industryVerticals.map((ind, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {industryVerticals.map((vert, idx) => (
                 <div
-                  key={i}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 space-y-3 hover:bg-white hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                  key={idx}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3"
+                >
+                  <span className="inline-block rounded-md bg-[#8B3FA8]/10 text-[#8B3FA8] text-[11px] font-bold px-2.5 py-1">
+                    {vert.badge}
+                  </span>
+                  <h3 className="text-base font-bold text-slate-900">{vert.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{vert.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Practice Areas / Services Showcase */}
+        <section className="py-20 bg-white border-b border-slate-100">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#E8823A]">
+                  Core Practice Areas
+                </span>
+                <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display mt-1">
+                  Full-Service CA Advisory &amp; Filing
+                </h2>
+              </div>
+              <Link
+                href="/services"
+                className="text-xs font-bold text-[#1B2A4A] hover:text-[#8B3FA8] flex items-center gap-1 transition-colors"
+              >
+                View All Practice Areas &rarr;
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {serviceCategories.slice(0, 3).map((cat, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm hover:border-[#8B3FA8]/40 transition-all space-y-4 flex flex-col justify-between"
                 >
                   <div className="space-y-3">
-                    <span className="inline-block rounded bg-[#8B3FA8]/10 px-2.5 py-0.5 text-[10px] font-bold text-[#8B3FA8]">
-                      {ind.badge}
-                    </span>
-                    <h3 className="text-base font-bold text-slate-900">{ind.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{ind.desc}</p>
+                    <h3 className="text-lg font-bold text-slate-900 font-display">
+                      {cat.category}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {cat.description}
+                    </p>
+                    <ul className="space-y-2 pt-2">
+                      {cat.services.slice(0, 4).map((s, sIdx) => (
+                        <li key={sIdx} className="text-xs text-slate-700 flex items-center gap-2">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                          <span>{s.name}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
+
                   <Link
-                    href="/contact"
-                    className="text-xs font-bold text-[#1B2A4A] hover:text-[#8B3FA8] flex items-center gap-1 pt-2"
+                    href={`/services#${cat.slug}`}
+                    className="inline-flex items-center text-xs font-bold text-[#1B2A4A] hover:text-[#8B3FA8] pt-3 border-t border-slate-200 transition-colors"
                   >
-                    Consult on this Sector &rarr;
+                    Explore {cat.category} &rarr;
                   </Link>
                 </div>
               ))}
@@ -290,181 +345,63 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Practice Areas / Services Grid */}
-        <section className="py-20 bg-slate-50">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
-                Core Practice Areas
-              </span>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
-                Comprehensive Corporate, Tax &amp; Audit Solutions
-              </h2>
-              <p className="text-sm text-slate-600">
-                End-to-end statutory services designed for founders, MSMEs, partnership firms, and growing private limited companies.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {serviceCategories.map((group, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-[#1B2A4A]">
-                      {idx === 0 && <Building className="h-5 w-5" />}
-                      {idx === 1 && <FileText className="h-5 w-5" />}
-                      {idx === 2 && <TrendingUp className="h-5 w-5" />}
-                      {idx === 3 && <Award className="h-5 w-5" />}
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-900 font-display">
-                        {group.category}
-                      </h3>
-                      <p className="mt-1 text-xs text-slate-500 leading-relaxed">
-                        {group.description}
-                      </p>
-                    </div>
-
-                    <ul className="space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-100">
-                      {group.services.map((srv, sIdx) => (
-                        <li key={sIdx}>
-                          <Link
-                            href={`/services/${srv.slug}`}
-                            className="flex items-center justify-between text-slate-600 hover:text-[#1B2A4A] hover:font-medium py-1 transition-colors"
-                          >
-                            <span>{srv.name}</span>
-                            <ArrowRight className="h-3 w-3 text-slate-400" />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="pt-6">
-                    <Link
-                      href="/services"
-                      className="text-xs font-bold text-[#8B3FA8] hover:underline flex items-center gap-1"
-                    >
-                      View All in {group.category} &rarr;
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Appellate Tribunal & High Court Capability Highlight */}
-        <section className="py-20 bg-slate-900 text-white">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 items-center">
-              <div className="lg:col-span-8 space-y-4">
-                <span className="inline-block rounded-md bg-[#E8823A]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#E8823A]">
-                  Specialized Legal Practice
-                </span>
-                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl font-display">
-                  Litigation Defense &amp; Appeals Before Appellate Authorities
-                </h2>
-                <p className="text-sm sm:text-base leading-relaxed text-slate-300">
-                  {companyInfo.aboutExtended}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs text-slate-300">
-                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
-                    <Scale className="h-5 w-5 text-[#8B3FA8] mb-2" />
-                    <p className="font-bold text-white">ITAT &amp; High Court</p>
-                    <p className="text-slate-400 mt-1">Direct tax appeal preparation and senior tribunal hearings.</p>
-                  </div>
-                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
-                    <FileCheck2 className="h-5 w-5 text-[#C43D6B] mb-2" />
-                    <p className="font-bold text-white">GST Appellate Authority</p>
-                    <p className="text-slate-400 mt-1">Show-cause notices, demand order appeals, and refund appeals.</p>
-                  </div>
-                  <div className="rounded-xl bg-slate-800/80 p-4 border border-slate-700">
-                    <Users2 className="h-5 w-5 text-[#E8823A] mb-2" />
-                    <p className="font-bold text-white">Senior Advisory Council</p>
-                    <p className="text-slate-400 mt-1">Advocate consultation for high-stakes commercial disputes.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-4 rounded-3xl bg-white/5 p-8 border border-white/10 text-center space-y-4">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20 text-amber-300">
-                  <Scale className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-bold text-white font-display">Received a Tax or GST Notice?</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Section 148, 143(2), or GST DRC-01 notices have strict 30-day statutory response windows. Do not delay.
-                </p>
-                <Link href="/contact" className="block">
-                  <Button className="w-full bg-[#E8823A] text-white hover:bg-[#E8823A]/90 font-bold text-xs py-3">
-                    Submit Notice for Urgent CA Review
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 3-Step Client Workflow */}
-        <section className="py-20 bg-white">
+        {/* 3-Step Simple Process */}
+        <section className="py-20 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
                 Streamlined Execution
               </span>
               <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
-                How We Work With You
+                How We Deliver 100% On-Time Compliance
               </h2>
-              <p className="text-sm text-slate-600">
-                Transparent, deadline-driven process with real-time tracking from onboarding to acknowledgment.
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {steps.map((st, i) => (
-                <div key={i} className="relative rounded-3xl border border-slate-200 bg-slate-50/50 p-8 shadow-sm space-y-4">
-                  <span className="font-mono text-3xl font-extrabold text-[#8B3FA8]/30">
+                <div
+                  key={i}
+                  className="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-4"
+                >
+                  <span className="font-mono text-3xl font-extrabold text-[#8B3FA8]/30 block">
                     {st.step}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900 font-display">{st.title}</h3>
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-600">
-                    {st.desc}
-                  </p>
+                  <h3 className="text-lg font-bold text-slate-900">{st.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{st.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
+        {/* Client Testimonials */}
+        <section className="py-20 bg-white border-b border-slate-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#8B3FA8]">
-                Client Endorsements
+              <span className="text-xs font-bold uppercase tracking-wider text-[#E8823A]">
+                Proven Client Trust
               </span>
               <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-display">
-                Trusted by Founders, CFOs &amp; Enterprises
+                Trusted by 1,000+ Indian Businesses &amp; Founders
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((t, idx) => (
-                <div key={idx} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm flex flex-col justify-between space-y-4">
-                  <div className="space-y-3">
-                    <span className="inline-block rounded bg-[#8B3FA8]/10 px-2.5 py-0.5 text-[10px] font-semibold text-[#8B3FA8]">
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 shadow-sm space-y-4 flex flex-col justify-between"
+                >
+                  <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+
+                  <div className="border-t border-slate-200 pt-3 space-y-0.5">
+                    <span className="font-bold text-slate-900 text-xs block">{t.author}</span>
+                    <span className="text-[11px] text-slate-500 block">{t.title}</span>
+                    <span className="inline-block text-[10px] font-bold text-[#8B3FA8] uppercase font-mono mt-1">
                       {t.tag}
                     </span>
-                    <p className="text-xs sm:text-sm leading-relaxed text-slate-700 italic">
-                      &ldquo;{t.quote}&rdquo;
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">{t.author}</p>
-                    <p className="text-xs text-slate-500">{t.title}</p>
                   </div>
                 </div>
               ))}
@@ -472,32 +409,26 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* Bottom High-Impact Conversion CTA Box */}
-        <section className="py-20 bg-[#1B2A4A] text-white relative overflow-hidden">
-          <div className="container mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-6 relative z-10">
-            <span className="inline-block rounded-full bg-emerald-400/20 px-3.5 py-1 text-xs font-bold text-emerald-300 border border-emerald-400/30">
-              Immediate CA Consultation Available
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-5xl font-display">
-              Ready to Lower Your Tax Burden &amp; Stay 100% Compliant?
+        {/* High-Impact Bottom CTA Strip */}
+        <section className="bg-[#1B2A4A] py-16 text-white text-center">
+          <div className="container mx-auto max-w-4xl px-4 space-y-6">
+            <h2 className="text-2xl sm:text-4xl font-bold font-display">
+              Ready to Minimize Taxes and Protect Your Enterprise?
             </h2>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-              Schedule a one-on-one session with our Chartered Accountants. We assess your financial position and provide tailored tax solutions.
+            <p className="text-slate-300 text-sm max-w-xl mx-auto">
+              Book a direct strategic review with our senior partners or upload your tax notices for immediate appraisal.
             </p>
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link href="/contact">
-                <Button size="xl" className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#C43D6B] to-[#E8823A] text-white hover:opacity-95 font-bold px-8 shadow-xl">
-                  Schedule Free CA Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                <Button size="lg" className="w-full sm:w-auto bg-[#E8823A] hover:bg-[#E8823A]/90 text-white font-bold px-8 shadow-lg">
+                  Book Free Strategic Review <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-4 text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all"
-              >
-                <MessageCircle className="h-5 w-5 fill-white" /> Chat Directly on WhatsApp
-              </a>
+              <Link href="/login">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto border-slate-400 bg-white/10 hover:bg-white/20 text-white font-bold px-6">
+                  <Lock className="h-4 w-4 mr-2 text-emerald-400" /> Open Secure Client Vault
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
