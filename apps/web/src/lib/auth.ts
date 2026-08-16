@@ -17,10 +17,11 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     CredentialsProvider({
-      name: 'Client Credentials',
+      name: 'Unified Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'client@example.com' },
+        email: { label: 'Email', type: 'email', placeholder: 'user@example.com' },
         password: { label: 'Password', type: 'password' },
+        totpCode: { label: 'TOTP Code', type: 'text' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -29,38 +30,57 @@ export const authOptions: NextAuthOptions = {
 
         const email = credentials.email.trim().toLowerCase();
         const password = credentials.password;
+        const totpCode = credentials.totpCode?.trim();
 
+        // 1. Attempt live API authentication with NestJS
         try {
-          const res = await fetch(`${API_BASE_URL}/auth/login`, {
+          const endpoint = totpCode ? `${API_BASE_URL}/auth/mfa/login-step2` : `${API_BASE_URL}/auth/login`;
+          const payload = totpCode ? { email, password, totpCode } : { email, password };
+
+          const res = await fetch(endpoint, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify(payload),
           });
 
           if (res.ok) {
             const data = await res.json();
-            if (data.user?.role !== 'CLIENT') {
-              throw new Error(
-                'This portal is for clients only. Staff members (CA / Admin) must log in via the Staff Console at port 3001.',
-              );
-            }
-
             return {
-              id: data.user.id,
-              email: data.user.email,
-              name: data.user.email?.split('@')[0] || 'Client',
-              role: data.user.role,
-              accessToken: data.tokens?.accessToken || 'mock_client_access_token',
-              refreshToken: data.tokens?.refreshToken || 'mock_client_refresh_token',
+              id: data.user?.id || `usr_${email.split('@')[0]}`,
+              email: data.user?.email || email,
+              name: data.user?.name || email.split('@')[0]?.replace('.', ' ').toUpperCase(),
+              role: data.user?.role || 'CLIENT',
+              accessToken: data.tokens?.accessToken || 'mock_access_token',
+              refreshToken: data.tokens?.refreshToken || 'mock_refresh_token',
             };
           }
         } catch {
-          // Fall through to seed/demo authentication
+          // Fall through to fallback demo accounts
         }
 
-        // Demo accounts fallback (useful when running without live Postgres container)
+        // 2. Demo Staff Accounts Fallback
+        const DEMO_STAFF: Record<string, { pass: string; role: string; name: string }> = {
+          'admin@thabrez.com': { pass: 'Admin@1234', role: 'ADMIN', name: 'Thabrez Admin' },
+          'priya.ca@thabrez.com': { pass: 'CA@1234', role: 'SENIOR_CA', name: 'CA Priya Sharma' },
+          'arun.associate@thabrez.com': { pass: 'Assoc@1234', role: 'ASSOCIATE', name: 'Arun Kumar' },
+          'desk@thabrez.com': { pass: 'Desk@1234', role: 'FRONT_DESK', name: 'Front Desk' },
+        };
+
+        if (DEMO_STAFF[email] && DEMO_STAFF[email].pass === password) {
+          const staff = DEMO_STAFF[email];
+          return {
+            id: `staff_${email.split('@')[0]}`,
+            email: email,
+            name: staff.name,
+            role: staff.role,
+            accessToken: `jwt_staff_token_${Date.now()}`,
+            refreshToken: `jwt_staff_refresh_${Date.now()}`,
+          };
+        }
+
+        // 3. Demo Client Accounts Fallback
         const DEMO_CLIENTS: Record<string, string> = {
           'rajan.mehta@example.com': 'Client@1234',
           'client@example.com': 'Client@1234',
@@ -79,7 +99,7 @@ export const authOptions: NextAuthOptions = {
           };
         }
 
-        throw new Error('Invalid email or password. Use demo account: client@example.com / Client@1234');
+        throw new Error('Invalid credentials. Use demo: client@example.com / Client@1234 or admin@thabrez.com / Admin@1234');
       },
     }),
   ],

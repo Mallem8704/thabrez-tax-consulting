@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Client Portal API Client for NestJS backend.
+ * Universal Portal & Admin API Client for NestJS backend.
  */
 export async function fetchPortalApi<T = unknown>(
   endpoint: string,
@@ -34,3 +34,5 @@ export async function fetchPortalApi<T = unknown>(
 
   return res.json();
 }
+
+export const fetchAdminApi = fetchPortalApi;
