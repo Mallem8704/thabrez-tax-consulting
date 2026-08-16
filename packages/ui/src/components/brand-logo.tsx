@@ -18,9 +18,9 @@ export function BrandLogo({
   const isDark = variant === 'dark';
 
   // Size scalers
-  const iconSize = size === 'sm' ? 32 : size === 'lg' ? 44 : 38;
-  const titleSize = size === 'sm' ? 'text-lg' : size === 'lg' ? 'text-2xl' : 'text-xl';
-  const subtitleSize = size === 'sm' ? 'text-[8px]' : 'text-[9.5px]';
+  const iconSize = size === 'sm' ? 28 : size === 'lg' ? 44 : 34;
+  const titleSize = size === 'sm' ? 'text-base sm:text-lg' : size === 'lg' ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl';
+  const subtitleSize = size === 'sm' ? 'text-[7.5px] sm:text-[8px]' : 'text-[8px] sm:text-[9.5px]';
 
   return (
     <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>

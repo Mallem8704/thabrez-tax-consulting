@@ -31,7 +31,22 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-slate-200 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.06)] font-sans select-none">
-      {/* Top Institutional Micro Bar */}
+      {/* Mobile Quick Call Micro Bar */}
+      <div className="bg-[#1B2A4A] py-1.5 px-4 text-slate-200 text-[11px] flex items-center justify-between lg:hidden">
+        <span className="flex items-center gap-1.5 text-[11px] font-semibold text-white truncate">
+          <ShieldCheck className="h-3.5 w-3.5 text-[#E8823A] shrink-0" />
+          <span>ICAI Certified Advisory</span>
+        </span>
+        <a
+          href="tel:8802222422"
+          className="inline-flex items-center gap-1 font-bold text-[#E8823A] bg-[#E8823A]/15 px-2.5 py-0.5 rounded text-[11px] shrink-0 hover:bg-[#E8823A]/25 transition-colors"
+        >
+          <Phone className="h-3 w-3" />
+          <span>Call CA Partner</span>
+        </a>
+      </div>
+
+      {/* Top Institutional Micro Bar (Desktop) */}
       <div className="border-b border-slate-900/10 bg-[#1B2A4A] py-2 text-slate-100 text-xs hidden lg:block">
         <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 text-[12px]">
