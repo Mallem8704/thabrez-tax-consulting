@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   transpilePackages: ['@thabrez/ui'],
   images: {
     remotePatterns: [
@@ -15,7 +16,6 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    // Enable when using Server Actions
     serverActions: {
       bodySizeLimit: '10mb',
     },
