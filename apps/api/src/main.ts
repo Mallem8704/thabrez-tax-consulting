@@ -74,21 +74,31 @@ async function bootstrap(): Promise<void> {
   // Public endpoints additionally use LeadRateLimiterService + LoginLockoutService.
 
   // ─── CORS ─────────────────────────────────────────────────────────────────
-  // Tighten allowedOrigins in production via CORS_ORIGINS env var.
-  const allowedOrigins = process.env['CORS_ORIGINS']?.split(',') ?? [
-    'http://localhost:3000', // apps/web
-    'http://localhost:3001', // apps/admin
-  ];
+  const rawOrigins = process.env['CORS_ORIGINS'] ?? 'http://localhost:3000,http://localhost:3001';
+  const allowedOrigins = rawOrigins.split(',').map((o) => o.trim().replace(/\/$/, ''));
 
   app.enableCors({
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-      // Allow requests with no origin (server-to-server, Razorpay webhooks, mobile apps)
+      // Allow requests with no origin (server-to-server, Razorpay webhooks, health checks, mobile apps)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
+      
+      const cleanOrigin = origin.replace(/\/$/, '');
+
+      // Check explicit allowed origins or Vercel preview/prod deployments (*.vercel.app)
+      if (
+        allowedOrigins.includes(cleanOrigin) ||
+        cleanOrigin.endsWith('.vercel.app') ||
+        cleanOrigin.includes('localhost') ||
+        cleanOrigin.includes('onrender.com') ||
+        cleanOrigin.includes('thabreztaxconsulting.com')
+      ) {
+        return callback(null, true);
+      }
+
       callback(new Error(`CORS: Origin ${origin} not allowed`));
     },
     methods: ['GET', 'HEAD', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
     credentials: true,
     maxAge: 86_400, // Pre-flight cache: 24 hours
   });
