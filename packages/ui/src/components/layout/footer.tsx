@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { BrandLogo } from '../brand-logo';
 import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export function Footer(): JSX.Element {
@@ -33,18 +34,7 @@ export function Footer(): JSX.Element {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 & 2: Firm identity */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative h-9 w-9 overflow-hidden rounded-lg bg-white p-0.5 shadow-sm">
-                <img
-                  src="/logo-icon.png"
-                  alt="Thabrez Tax Consulting Icon"
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <span className="text-base font-bold text-white leading-tight">
-                Thabrez Tax Consulting Private Limited
-              </span>
-            </div>
+            <BrandLogo variant="dark" size="md" />
 
             <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
               A specialized consultancy firm delivering excellence in Income Tax, GST, Statutory Audit, Corporate Law, Accounting Services, and Institutional Debt Advisory.
