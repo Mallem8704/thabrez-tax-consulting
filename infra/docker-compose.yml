@@ -1,0 +1,66 @@
+# Thabrez — local development infrastructure
+# Postgres 16 + Redis 7
+#
+# Usage:
+#   docker compose -f infra/docker-compose.yml up -d       # start
+#   docker compose -f infra/docker-compose.yml down        # stop (keeps data)
+#   docker compose -f infra/docker-compose.yml down -v     # stop + wipe volumes
+#
+# Credentials match the DATABASE_URL in .env.example — change both together.
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL 16
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: thabrez_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: thabrez
+      POSTGRES_PASSWORD: thabrez_dev_secret
+      POSTGRES_DB: thabrez_db
+      # Tune shared_buffers for a dev laptop (default is 128 MB)
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: place .sql init scripts in infra/initdb/ and they run on first start
+      # - ./initdb:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U thabrez -d thabrez_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # Redis 7
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: thabrez_redis
+    restart: unless-stopped
+    # Enable basic persistence (AOF) so queue jobs survive container restarts
+    command: redis-server --appendonly yes --appendfsync everysec
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+# ---------------------------------------------------------------------------
+# Named volumes — data persists across `docker compose down` restarts
+# ---------------------------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

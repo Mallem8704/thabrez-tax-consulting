@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Thabrez design tokens — CSS custom properties.
+  These map to the Tailwind color aliases defined in packages/config/tailwind/base.ts.
+  Import this file in your app's root layout (or globals.css that imports it).
+
+  Palette: Deep navy + warm gold — communicates trust, authority, and prosperity.
+*/
+
+@layer base {
+  :root {
+    /* Background / surface */
+    --background: 210 20% 98%;         /* near-white warm surface */
+    --foreground: 215 35% 12%;         /* deep navy text */
+
+    /* Cards / popovers */
+    --card: 0 0% 100%;
+    --card-foreground: 215 35% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 35% 12%;
+
+    /* Primary — deep navy blue */
+    --primary: 215 60% 22%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Secondary — soft warm grey */
+    --secondary: 210 16% 93%;
+    --secondary-foreground: 215 35% 20%;
+
+    /* Accent — warm gold (₹ / trust) */
+    --accent: 40 90% 48%;
+    --accent-foreground: 215 35% 12%;
+
+    /* Muted */
+    --muted: 210 16% 93%;
+    --muted-foreground: 215 20% 45%;
+
+    /* Destructive */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Border / input / ring */
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 215 60% 22%;
+
+    /* Radius */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 215 35% 8%;
+    --foreground: 210 20% 96%;
+
+    --card: 215 30% 11%;
+    --card-foreground: 210 20% 96%;
+    --popover: 215 30% 11%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 215 65% 65%;
+    --primary-foreground: 215 35% 8%;
+
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 210 20% 88%;
+
+    --accent: 40 85% 55%;
+    --accent-foreground: 215 35% 8%;
+
+    --muted: 215 25% 18%;
+    --muted-foreground: 215 20% 58%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 215 65% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}

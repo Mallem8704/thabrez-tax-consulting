@@ -1,0 +1,328 @@
+// Prisma schema for the Thabrez Tax Consulting platform.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =============================================================================
+// Enums
+// =============================================================================
+
+enum UserRole {
+  CLIENT
+  ASSOCIATE
+  SENIOR_CA
+  ADMIN
+  FRONT_DESK
+}
+
+enum EntityType {
+  INDIVIDUAL
+  PROPRIETORSHIP
+  PARTNERSHIP
+  LLP
+  PVT_LTD
+  OPC
+}
+
+/// Covers every billable service the firm offers.
+/// DeadlineType mirrors this enum so deadlines are strongly typed by service.
+enum ServiceType {
+  GST_FILING
+  ITR_FILING
+  TDS_FILING
+  ROC_ANNUAL_COMPLIANCE
+  COMPANY_REGISTRATION
+  MSME_REGISTRATION
+  TRADEMARK
+  LOAN_SERVICE
+  BOOKKEEPING
+  OTHER
+}
+
+enum CaseStatus {
+  RECEIVED
+  IN_REVIEW
+  FILED
+  ACKNOWLEDGED
+  CLOSED
+}
+
+/// Mirrors ServiceType — every service category can have a recurring deadline.
+enum DeadlineType {
+  GST_FILING
+  ITR_FILING
+  TDS_FILING
+  ROC_ANNUAL_COMPLIANCE
+  COMPANY_REGISTRATION
+  MSME_REGISTRATION
+  TRADEMARK
+  LOAN_SERVICE
+  BOOKKEEPING
+  OTHER
+}
+
+enum DeadlineStatus {
+  PENDING
+  REMINDED
+  COMPLETED
+  OVERDUE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  LOST
+}
+
+enum ResourceType {
+  ACT
+  RULE
+  FORM
+  CIRCULAR
+  BULLETIN
+}
+
+// =============================================================================
+// Models
+// =============================================================================
+
+/// Platform user — one row per human regardless of role.
+/// CLIENT users get a linked Client profile.
+/// SENIOR_CA / ASSOCIATE / ADMIN / FRONT_DESK are staff.
+model User {
+  id           String   @id @default(cuid())
+  email        String?  @unique
+  phone        String?  @unique
+  passwordHash String?
+  role         UserRole @default(CLIENT)
+  mfaEnabled   Boolean  @default(false)
+  mfaSecret    String?  // TOTP base-32 seed (encrypted at rest in prod)
+  createdAt    DateTime @default(now())
+
+  // Relations
+  clientProfile   Client?    @relation("UserClient")
+  assignedClients Client[]   @relation("AssignedCA")
+  assignedCases   Case[]     @relation("CaseAssignee")
+  sentMessages    Message[]
+  uploadedDocs    Document[]
+  auditLogs       AuditLog[]
+  blogPosts       BlogPost[]
+
+  @@map("users")
+}
+
+/// Client profile — one per CLIENT-role user.
+/// assignedCaId points to a staff User (SENIOR_CA or ASSOCIATE).
+model Client {
+  id           String     @id @default(cuid())
+  userId       String     @unique
+  user         User       @relation("UserClient", fields: [userId], references: [id], onDelete: Cascade)
+  companyName  String?
+  pan          String?    @unique
+  gstin        String?    @unique
+  entityType   EntityType @default(INDIVIDUAL)
+  assignedCaId String?
+  assignedCa   User?      @relation("AssignedCA", fields: [assignedCaId], references: [id], onDelete: SetNull)
+  createdAt    DateTime   @default(now())
+
+  // Relations
+  cases     Case[]
+  deadlines Deadline[]
+  invoices  Invoice[]
+
+  @@index([assignedCaId])
+  @@map("clients")
+}
+
+/// A single filing / engagement. This is the primary unit of work.
+model Case {
+  id           String      @id @default(cuid())
+  clientId     String
+  client       Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  serviceType  ServiceType
+  status       CaseStatus  @default(RECEIVED)
+  assignedToId String?
+  assignedTo   User?       @relation("CaseAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  dueDate      DateTime?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  // Relations
+  documents Document[]
+  deadlines Deadline[]
+  messages  Message[]
+  invoices  Invoice[]
+
+  @@index([clientId])
+  @@index([status])
+  @@index([assignedToId])
+  @@index([dueDate])
+  @@index([serviceType])
+  @@map("cases")
+}
+
+/// Document metadata only — binary content lives in S3.
+/// s3Key is the full object path (e.g. "clients/cid_xyz/cases/case_abc/pan_card_v1.pdf").
+model Document {
+  id           String   @id @default(cuid())
+  caseId       String
+  case         Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  uploadedById String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  s3Key        String   @unique
+  filename     String
+  fileSize     Int      // bytes
+  version      Int      @default(1)
+  uploadedAt   DateTime @default(now())
+
+  @@index([caseId])
+  @@index([uploadedById])
+  @@map("documents")
+}
+
+/// Compliance deadline — generated per client per obligation cycle.
+/// caseId is nullable: a deadline can exist before a case is opened.
+model Deadline {
+  id             String         @id @default(cuid())
+  clientId       String
+  client         Client         @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  caseId         String?
+  case           Case?          @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  type           DeadlineType
+  dueDate        DateTime
+  status         DeadlineStatus @default(PENDING)
+  reminderSentAt DateTime?
+  remindedMarks  Int[]          @default([])
+  createdAt      DateTime       @default(now())
+
+  @@index([clientId])
+  @@index([caseId])
+  @@index([dueDate])
+  @@index([status])
+  @@map("deadlines")
+}
+
+/// Invoice issued for services. amount in INR (Decimal avoids float rounding).
+model Invoice {
+  id                String        @id @default(cuid())
+  invoiceNumber     String?       @unique
+  clientId          String
+  client            Client        @relation(fields: [clientId], references: [id])
+  caseId            String?
+  case              Case?         @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  amount            Decimal       @db.Decimal(12, 2)
+  status            InvoiceStatus @default(DRAFT)
+  lineItems         Json?
+  notes             String?
+  dueDate           DateTime?
+  razorpayOrderId   String?       @unique
+  razorpayPaymentId String?       @unique
+  issuedAt          DateTime?
+  paidAt            DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([clientId])
+  @@index([status])
+  @@index([issuedAt])
+  @@map("invoices")
+}
+
+/// Per-case message between client and assigned CA.
+/// Scoped to a case for auditability — not a general chat.
+model Message {
+  id        String   @id @default(cuid())
+  caseId    String
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
+  body      String
+  createdAt DateTime @default(now())
+
+  @@index([caseId])
+  @@index([senderId])
+  @@map("messages")
+}
+
+/// Inbound lead from the marketing site contact / consultation form.
+model Lead {
+  id              String     @id @default(cuid())
+  name            String
+  phone           String
+  email           String?
+  serviceInterest String?    // free-text or ServiceType value
+  message         String?
+  notes           String?
+  source          String?    // e.g. "contact_form", "google_ads", "referral"
+  status          LeadStatus @default(NEW)
+  createdAt       DateTime   @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+/// Staff-authored blog posts / tax insights.
+model BlogPost {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  body        String    // Markdown
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([published])
+  @@index([publishedAt])
+  @@map("blog_posts")
+}
+
+/// Knowledge bank item — acts, rules, forms, circulars, and bulletins.
+model Resource {
+  id            String       @id @default(cuid())
+  type          ResourceType
+  title         String
+  category      String       // e.g. "Income Tax", "GST", "Companies Act"
+  bodyOrFileUrl String?      // Inline Markdown body OR S3 URL for a PDF
+  createdAt     DateTime     @default(now())
+
+  @@index([type])
+  @@index([category])
+  @@map("resources")
+}
+
+/// Immutable compliance audit trail. Never update or delete rows here.
+/// actorId is nullable to support system-generated actions (cron jobs, webhooks).
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String   // e.g. "DOCUMENT_DOWNLOAD", "CASE_STATUS_CHANGE", "INVOICE_PAID"
+  entity    String   // Model name, e.g. "Document", "Case", "Invoice"
+  entityId  String   // CUID of the affected row
+  metadata  Json?    // IP address, before/after values, etc.
+  createdAt DateTime @default(now())
+
+  @@index([actorId])
+  @@index([entity, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

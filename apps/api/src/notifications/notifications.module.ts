@@ -1,0 +1,10 @@
+import { Module, Global } from '@nestjs/common';
+import { NotificationsService } from './notifications.service';
+import { Msg91Service } from './msg91.service';
+
+@Global()
+@Module({
+  providers: [NotificationsService, Msg91Service],
+  exports: [NotificationsService, Msg91Service],
+})
+export class NotificationsModule {}

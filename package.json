@@ -1,0 +1,43 @@
+{
+  "name": "thabrez",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Thabrez Tax Consulting — monorepo (marketing site, client portal, admin console, API)",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "dev": "node infra/dev.mjs",
+    "turbo:dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\" --ignore-path .gitignore",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "infra:up": "docker compose -f infra/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infra/docker-compose.yml down",
+    "infra:reset": "docker compose -f infra/docker-compose.yml down -v",
+    "infra:logs": "docker compose -f infra/docker-compose.yml logs -f",
+    "db:generate": "pnpm --filter @thabrez/db db:generate",
+    "db:migrate": "pnpm --filter @thabrez/db db:migrate",
+    "db:push": "pnpm --filter @thabrez/db db:push",
+    "db:studio": "pnpm --filter @thabrez/db db:studio",
+    "db:seed": "pnpm --filter @thabrez/db db:seed"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^18.3.23",
+      "@types/react-dom": "^18.3.7"
+    }
+  },
+  "packageManager": "pnpm@9.15.9"
+}
