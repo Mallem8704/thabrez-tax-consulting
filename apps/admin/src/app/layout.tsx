@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '@thabrez/ui/globals.css';
+import './globals.css';
 import { AuthSessionProvider } from '../components/providers/session-provider';
 import { InactivityTracker } from '../components/auth/inactivity-tracker';
 

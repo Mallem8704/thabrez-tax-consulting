@@ -8,8 +8,9 @@ export async function fetchAdminApi<T = unknown>(
   options: RequestInit = {},
   accessToken?: string,
 ): Promise<T> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-  const url = `${apiUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${apiUrl}${cleanEndpoint}`;
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

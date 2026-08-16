@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, Global } from '@nestjs/common';
 import { AuditService } from './audit.service';
 
 /**
- * AuditModule — provides AuditService used by AuditInterceptor and other services.
- * Exports AuditService so the global interceptor can inject it.
+ * AuditModule — provides AuditService globally to all modules and interceptors.
+ * Marked @Global() so any service can inject AuditService directly.
  */
+@Global()
 @Module({
   providers: [AuditService],
   exports: [AuditService],

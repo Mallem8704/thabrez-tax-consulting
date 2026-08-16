@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import '@thabrez/ui/globals.css';
+import './globals.css';
 import { StickyConsultationCta } from '@thabrez/ui';
 import { AuthSessionProvider } from '../components/providers/session-provider';
 
