@@ -127,15 +127,6 @@ export default function HomePage(): JSX.Element {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Left Column: Magnetic High-Prestige Copy & Value Props */}
               <div className="lg:col-span-6 space-y-6 text-center lg:text-left cinematic-fade-left">
-                {/* Live Authority Status Pill */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-                  </span>
-                  <span>Direct CA Partner Access • Bengaluru &amp; Kadiri</span>
-                </div>
-
                 {/* Punchy Master Headline */}
                 <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.12] text-white">
                   Precision Tax Law.<br />
