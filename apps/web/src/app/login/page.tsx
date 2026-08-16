@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import {
   Button,
@@ -19,7 +19,6 @@ import {
 import { Lock, Mail, AlertCircle, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 function LoginContent(): JSX.Element {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/portal';
   const urlError = searchParams.get('error');
@@ -54,8 +53,7 @@ function LoginContent(): JSX.Element {
         setErrorMessage(res.error);
         setIsLoading(false);
       } else if (res?.ok) {
-        router.push(callbackUrl);
-        router.refresh();
+        window.location.href = callbackUrl;
       } else {
         setErrorMessage('Unable to complete login. Please try again.');
         setIsLoading(false);
