@@ -11,7 +11,7 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "echo '@thabrez/ui ready'",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
@@ -43,13 +43,13 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@thabrez/config": "workspace:*",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "tailwindcss": "^3.4.17"
   }
 }

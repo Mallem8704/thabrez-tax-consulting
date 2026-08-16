@@ -1,6 +1,25 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV",
+    "PORT",
+    "JWT_SECRET",
+    "JWT_EXPIRATION",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "ADMIN_NEXTAUTH_URL",
+    "API_URL",
+    "NEXT_PUBLIC_API_URL",
+    "CORS_ORIGINS",
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DB",
+    "DATABASE_URL",
+    "REDIS_URL",
+    "NEXT_PUBLIC_CONTACT_PHONE_1",
+    "NEXT_PUBLIC_CONTACT_PHONE_2"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
