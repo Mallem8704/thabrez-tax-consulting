@@ -1,0 +1,108 @@
+# =============================================================================
+# Render Blueprint Specification for Thabrez Tax Consulting
+# Docs: https://render.com/docs/blueprint-spec
+# =============================================================================
+
+version: "1"
+
+databases:
+  # ---------------------------------------------------------------------------
+  # 1. Managed PostgreSQL Database (Free Tier)
+  # ---------------------------------------------------------------------------
+  - name: thabrez-postgres
+    databaseName: thabrez_db
+    user: thabrez
+    plan: free
+    region: singapore # Closest low-latency region to India
+    ipAllowList: []
+
+services:
+  # ---------------------------------------------------------------------------
+  # 2. Managed Redis (Free Tier)
+  # ---------------------------------------------------------------------------
+  - type: redis
+    name: thabrez-redis
+    plan: free
+    region: singapore
+    ipAllowList: []
+    maxmemoryPolicy: allkeys-lru
+
+  # ---------------------------------------------------------------------------
+  # 3. NestJS REST API Web Service
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: thabrez-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @thabrez/db db:generate && pnpm --filter @thabrez/api build
+    startCommand: node apps/api/dist/main.js
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: thabrez-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: thabrez-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: 7d
+      - key: CORS_ORIGINS
+        value: https://thabrez-web.onrender.com,https://thabrez-admin.onrender.com
+
+  # ---------------------------------------------------------------------------
+  # 4. Public Web App & Client Portal
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: thabrez-web
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @thabrez/db db:generate && pnpm --filter @thabrez/web build
+    startCommand: node apps/web/node_modules/next/dist/bin/next start --port $PORT apps/web
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://thabrez-web.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        value: https://thabrez-api.onrender.com/api/v1
+      - key: API_URL
+        value: https://thabrez-api.onrender.com/api/v1
+
+  # ---------------------------------------------------------------------------
+  # 5. Staff Management Console (Admin)
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: thabrez-admin
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @thabrez/db db:generate && pnpm --filter @thabrez/admin build
+    startCommand: node apps/admin/node_modules/next/dist/bin/next start --port $PORT apps/admin
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://thabrez-admin.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        value: https://thabrez-api.onrender.com/api/v1
+      - key: API_URL
+        value: https://thabrez-api.onrender.com/api/v1
