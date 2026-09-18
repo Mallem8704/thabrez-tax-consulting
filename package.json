@@ -9,6 +9,8 @@
   },
   "scripts": {
     "dev": "node infra/dev.mjs",
+    "admin": "pnpm --filter @thabrez/web dev --port 3005",
+    "dashboard": "pnpm --filter @thabrez/web dev --port 3005",
     "turbo:dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "lint": "turbo run lint",
