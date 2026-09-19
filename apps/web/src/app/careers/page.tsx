@@ -203,7 +203,7 @@ export default function CareersPage(): JSX.Element {
         <section className="py-16 bg-[#1B2A4A] text-white">
           <div className="container mx-auto max-w-4xl px-4 text-center space-y-4">
             <h2 className="text-2xl sm:text-3xl font-bold font-display">
-              Don't See the Exact Role You're Looking For?
+              Don&apos;t See the Exact Role You&apos;re Looking For?
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
               We are constantly seeking brilliant tax minds and litigation advocates. Send your resume for future consideration.

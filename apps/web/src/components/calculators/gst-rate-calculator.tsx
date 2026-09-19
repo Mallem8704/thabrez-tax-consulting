@@ -12,35 +12,35 @@ interface GstRateItem {
   condition?: string;
 }
 
+const RATE_ITEMS: GstRateItem[] = [
+  { code: '998311', type: 'SAC', description: 'Legal and Accounting / Chartered Accountant Services', category: 'Professional Services', rate: 18 },
+  { code: '998314', type: 'SAC', description: 'Information Technology and Software Development Services', category: 'IT & Telecom', rate: 18 },
+  { code: '998319', type: 'SAC', description: 'Management Consulting and Business Advisory Services', category: 'Professional Services', rate: 18 },
+  { code: '996331', type: 'SAC', description: 'Restaurant Services (Standalone, non-AC or AC)', category: 'Hospitality', rate: 5, condition: 'Without ITC benefit' },
+  { code: '996311', type: 'SAC', description: 'Hotel Accommodation (Room tariff up to ₹7,500/day)', category: 'Hospitality', rate: 12 },
+  { code: '996312', type: 'SAC', description: 'Hotel Accommodation (Room tariff above ₹7,500/day)', category: 'Hospitality', rate: 18 },
+  { code: '996511', type: 'SAC', description: 'Goods Transport Agency (GTA) Services (Forward Charge)', category: 'Logistics', rate: 12 },
+  { code: '996512', type: 'SAC', description: 'Goods Transport Agency (GTA) Services (RCM basis)', category: 'Logistics', rate: 5 },
+  { code: '8471', type: 'HSN', description: 'Laptops, Computers and Electronic Data Processors', category: 'Electronics', rate: 18 },
+  { code: '8517', type: 'HSN', description: 'Smartphones and Mobile Telephones', category: 'Electronics', rate: 18 },
+  { code: '8703', type: 'HSN', description: 'Motor Cars and Passenger Vehicles', category: 'Automobiles', rate: 28, condition: 'Plus applicable Compensation Cess' },
+  { code: '3004', type: 'HSN', description: 'Medicaments and Essential Pharmaceutical Formulations', category: 'Healthcare', rate: 12 },
+  { code: '0401', type: 'HSN', description: 'Fresh Fresh Milk and Curd (Unbranded & Loose)', category: 'Food & Agriculture', rate: 0 },
+  { code: '0402', type: 'HSN', description: 'Packaged & Branded Paneer, Butter and Dairy Spreads', category: 'Food & Agriculture', rate: 5 },
+  { code: '6203', type: 'HSN', description: 'Readymade Garments and Apparel (Sale value up to ₹1,000)', category: 'Textiles', rate: 5 },
+  { code: '6204', type: 'HSN', description: 'Readymade Garments and Apparel (Sale value above ₹1,000)', category: 'Textiles', rate: 12 },
+  { code: '6802', type: 'HSN', description: 'Granite, Marble Slabs and Building Tiles', category: 'Construction', rate: 18 },
+  { code: '2523', type: 'HSN', description: 'Portland Cement, Aluminous Cement and Mortar', category: 'Construction', rate: 28 },
+];
+
 export function GstRateCalculator(): JSX.Element {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const rateItems: GstRateItem[] = [
-    { code: '998311', type: 'SAC', description: 'Legal and Accounting / Chartered Accountant Services', category: 'Professional Services', rate: 18 },
-    { code: '998314', type: 'SAC', description: 'Information Technology and Software Development Services', category: 'IT & Telecom', rate: 18 },
-    { code: '998319', type: 'SAC', description: 'Management Consulting and Business Advisory Services', category: 'Professional Services', rate: 18 },
-    { code: '996331', type: 'SAC', description: 'Restaurant Services (Standalone, non-AC or AC)', category: 'Hospitality', rate: 5, condition: 'Without ITC benefit' },
-    { code: '996311', type: 'SAC', description: 'Hotel Accommodation (Room tariff up to ₹7,500/day)', category: 'Hospitality', rate: 12 },
-    { code: '996312', type: 'SAC', description: 'Hotel Accommodation (Room tariff above ₹7,500/day)', category: 'Hospitality', rate: 18 },
-    { code: '996511', type: 'SAC', description: 'Goods Transport Agency (GTA) Services (Forward Charge)', category: 'Logistics', rate: 12 },
-    { code: '996512', type: 'SAC', description: 'Goods Transport Agency (GTA) Services (RCM basis)', category: 'Logistics', rate: 5 },
-    { code: '8471', type: 'HSN', description: 'Laptops, Computers and Electronic Data Processors', category: 'Electronics', rate: 18 },
-    { code: '8517', type: 'HSN', description: 'Smartphones and Mobile Telephones', category: 'Electronics', rate: 18 },
-    { code: '8703', type: 'HSN', description: 'Motor Cars and Passenger Vehicles', category: 'Automobiles', rate: 28, condition: 'Plus applicable Compensation Cess' },
-    { code: '3004', type: 'HSN', description: 'Medicaments and Essential Pharmaceutical Formulations', category: 'Healthcare', rate: 12 },
-    { code: '0401', type: 'HSN', description: 'Fresh Fresh Milk and Curd (Unbranded & Loose)', category: 'Food & Agriculture', rate: 0 },
-    { code: '0402', type: 'HSN', description: 'Packaged & Branded Paneer, Butter and Dairy Spreads', category: 'Food & Agriculture', rate: 5 },
-    { code: '6203', type: 'HSN', description: 'Readymade Garments and Apparel (Sale value up to ₹1,000)', category: 'Textiles', rate: 5 },
-    { code: '6204', type: 'HSN', description: 'Readymade Garments and Apparel (Sale value above ₹1,000)', category: 'Textiles', rate: 12 },
-    { code: '6802', type: 'HSN', description: 'Granite, Marble Slabs and Building Tiles', category: 'Construction', rate: 18 },
-    { code: '2523', type: 'HSN', description: 'Portland Cement, Aluminous Cement and Mortar', category: 'Construction', rate: 28 },
-  ];
-
-  const categories = ['all', ...Array.from(new Set(rateItems.map((i) => i.category)))];
+  const categories = ['all', ...Array.from(new Set(RATE_ITEMS.map((i) => i.category)))];
 
   const filteredItems = useMemo(() => {
-    return rateItems.filter((item) => {
+    return RATE_ITEMS.filter((item) => {
       const matchQuery =
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.code.toLowerCase().includes(searchQuery.toLowerCase()) ||

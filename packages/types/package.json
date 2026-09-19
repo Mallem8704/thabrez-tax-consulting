@@ -10,8 +10,8 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "dependencies": {
     "zod": "^3.25.76"
