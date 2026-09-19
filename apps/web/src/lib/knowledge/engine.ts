@@ -16,11 +16,20 @@ import {
   SEED_DOCUMENTS,
   SEED_COMPLIANCE_DEADLINES,
   SEED_TAX_RATES,
+  ALL_FORM_SUBSECTORS,
+  ALL_RULE_SUBSECTORS,
+  ALL_ACT_SUBSECTORS,
+  ALL_GOV_LINKS,
+  ALL_UTILITIES,
+  SubSectorMeta,
+  GovLinkItem,
+  UtilityItem,
 } from './data/seed-knowledge';
 
 export interface KnowledgeFilterOptions {
   q?: string | undefined;
   category?: string | undefined;
+  subSector?: string | undefined;
   documentType?: string | undefined;
   authority?: string | undefined;
   financialYear?: string | undefined;
@@ -54,6 +63,30 @@ export class KnowledgeBankEngine {
   }
 
   /**
+   * Retrieves sub-sectors by category type (forms, rules, acts).
+   */
+  static getSubsectors(category?: 'forms' | 'rules' | 'acts'): SubSectorMeta[] {
+    if (category === 'forms') return ALL_FORM_SUBSECTORS;
+    if (category === 'rules') return ALL_RULE_SUBSECTORS;
+    if (category === 'acts') return ALL_ACT_SUBSECTORS;
+    return [...ALL_FORM_SUBSECTORS, ...ALL_RULE_SUBSECTORS, ...ALL_ACT_SUBSECTORS];
+  }
+
+  /**
+   * Retrieves official government portal directory links.
+   */
+  static getGovLinks(): GovLinkItem[] {
+    return ALL_GOV_LINKS;
+  }
+
+  /**
+   * Retrieves official offline utilities and schema downloads.
+   */
+  static getUtilities(): UtilityItem[] {
+    return ALL_UTILITIES;
+  }
+
+  /**
    * Queries documents with multi-faceted filtering and full-text keyword ranking.
    */
   static queryDocuments(options: KnowledgeFilterOptions = {}): {
@@ -63,6 +96,7 @@ export class KnowledgeBankEngine {
     const {
       q = '',
       category,
+      subSector,
       documentType,
       authority,
       financialYear,
@@ -74,9 +108,14 @@ export class KnowledgeBankEngine {
 
     const queryClean = q.trim().toLowerCase();
 
-    let filtered = SEED_DOCUMENTS.filter((doc) => {
+    const filtered = SEED_DOCUMENTS.filter((doc) => {
       // Only published items in public views
       if (doc.reviewStatus !== ReviewStatus.PUBLISHED) return false;
+
+      // Sub-sector filter
+      if (subSector && subSector !== 'ALL') {
+        if (doc.subSector?.toLowerCase() !== subSector.toLowerCase()) return false;
+      }
 
       // Category filter (by id or slug)
       if (category && category !== 'ALL') {
@@ -117,6 +156,7 @@ export class KnowledgeBankEngine {
         const summaryMatch = doc.summary?.toLowerCase().includes(queryClean) || false;
         const contentMatch = doc.content?.toLowerCase().includes(queryClean) || false;
         const docNumMatch = doc.documentNumber?.toLowerCase().includes(queryClean) || false;
+        const formCodeMatch = doc.formCode?.toLowerCase().includes(queryClean) || false;
         const categoryMatch = doc.categoryName?.toLowerCase().includes(queryClean) || false;
         const authorityMatch = doc.authority.toLowerCase().includes(queryClean);
 
@@ -126,7 +166,16 @@ export class KnowledgeBankEngine {
           (queryClean.includes('115bac') && (doc.title.includes('115BAC') || (doc.content?.includes('115BAC') ?? false))) ||
           (queryClean.includes('gstr') && (doc.title.includes('GSTR') || (doc.summary?.includes('GSTR') ?? false)));
 
-        if (!titleMatch && !summaryMatch && !contentMatch && !docNumMatch && !categoryMatch && !authorityMatch && !isAliasMatch) {
+        if (
+          !titleMatch &&
+          !summaryMatch &&
+          !contentMatch &&
+          !docNumMatch &&
+          !formCodeMatch &&
+          !categoryMatch &&
+          !authorityMatch &&
+          !isAliasMatch
+        ) {
           return false;
         }
       }
