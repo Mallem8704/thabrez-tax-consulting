@@ -69,7 +69,7 @@ export function Footer(): JSX.Element {
               <div className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 text-[#E8823A] shrink-0" />
                 <span className="font-mono">
-                  <a href="tel:8802222422" className="hover:text-white">880-2222-422</a> • <a href="tel:7972222422" className="hover:text-white">797-2222-422</a>
+                  <a href="tel:9550765308" className="hover:text-white">9550765308 (Sameer)</a> • <a href="tel:8802222422" className="hover:text-white">880-2222-422</a>
                 </span>
               </div>
             </div>
@@ -153,15 +153,15 @@ export function Footer(): JSX.Element {
                 <p className="font-semibold text-white flex items-center gap-1">
                   <MapPin className="h-3 w-3 text-[#E8823A]" /> Registered Office
                 </p>
-                <p className="mt-0.5">No.1-618-3A, 1st Floor, Opp. Sangam Theatre</p>
-                <p>Kadiri, Sri Satya Sai Dist - 515591</p>
+                <p className="mt-0.5">No.56, Ground Floor, 4th Cross, Sun rise colony, C N Halli</p>
+                <p>Bengaluru - 560002</p>
               </div>
               <div>
                 <p className="font-semibold text-white flex items-center gap-1">
-                  <MapPin className="h-3 w-3 text-[#E8823A]" /> Bengaluru Branch
+                  <MapPin className="h-3 w-3 text-[#E8823A]" /> Branch Office
                 </p>
-                <p className="mt-0.5">No.56, Ground Floor, 4th Cross, Sun Rise Colony, C N Halli</p>
-                <p>Bengaluru - 560002</p>
+                <p className="mt-0.5">No.1-618-3A, 1st Floor, Opposite Sangam Theatre</p>
+                <p>Kadiri, Sri Satya Sai District - 515591</p>
               </div>
             </div>
           </div>

@@ -1,21 +1,25 @@
 export const companyInfo = {
   legalName: "Thabrez Tax Consulting Private Limited",
   registeredOffice: {
+    line1: "No.56, Ground Floor, 4th Cross, Sun rise colony, C N Halli",
+    city: "Bengaluru",
+    pincode: "560002",
+  },
+  branchOffice: {
     line1: "No.1-618-3A, 1st Floor, Opposite Sangam Theatre",
     city: "Kadiri, Sri Satya Sai District",
     pincode: "515591",
   },
-  branchOffice: {
-    line1: "No.56, Ground Floor, 4th Cross, Sun Rise Colony, C N Halli",
-    city: "Bengaluru",
-    pincode: "560002",
-  },
-  phone: ["880-2222-422", "797-2222-422"], // confirmed current numbers from firm's own marketing material (Aug 2026)
-  email: "ca.thabrez@thabreztaxconsulting.com", // confirmed current email from firm's own marketing material — supersedes info@ used on the old site
+  phone: ["9550765308", "880-2222-422"], // 9550765308 (Sameer) & 880-2222-422
+  phoneDetails: [
+    { number: "9550765308", label: "Sameer", display: "+91 9550765308" },
+    { number: "880-2222-422", label: "Helpline", display: "+91 880-2222-422" },
+  ],
+  email: "info@thabreztaxconsulting.com",
   website: "www.thabreztaxconsulting.com",
   hours: "Monday - Saturday: 10am to 7pm, Sunday: Closed",
-  mapCoordinates: { lat: 14.11432, lng: 78.15974 }, // Kadiri, Sri Satya Sai District, Andhra Pradesh 515591
-  branchCoordinates: { lat: 12.9648, lng: 77.5925 }, // Bengaluru branch office
+  mapCoordinates: { lat: 12.9648, lng: 77.5925 }, // Registered Office (Bengaluru)
+  branchCoordinates: { lat: 14.11432, lng: 78.15974 }, // Branch Office (Kadiri)
   socialLinks: {
     // TODO: replace with the firm's real profile URLs before launch —
     // the old site's links pointed to generic platform homepages, not
@@ -592,7 +596,7 @@ export const jobOpenings: JobOpening[] = [
     slug: "senior-tax-associate",
     title: "Senior Tax & GST Associate",
     department: "Indirect Taxation & Litigation",
-    location: "Bengaluru (C N Halli Branch)",
+    location: "Bengaluru (Registered Office)",
     type: "Full-Time Permanent",
     experience: "3 - 5 Years in CA Firm",
     description: "Lead GST compliance engagements, handle departmental audit representations, and oversee monthly compliance workflows for corporate retainers.",
@@ -613,7 +617,7 @@ export const jobOpenings: JobOpening[] = [
     slug: "senior-accountant-tally-zoho",
     title: "Senior Accountant (Tally & Zoho Books)",
     department: "Accounting & Outsourcing",
-    location: "Kadiri (Registered Office)",
+    location: "Kadiri (Branch Office)",
     type: "Full-Time Permanent",
     experience: "2 - 4 Years",
     description: "Maintain end-to-end accounting ledgers, payroll processing, TDS deduction, and generate management financial reports for enterprise clients.",

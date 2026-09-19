@@ -86,12 +86,12 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
             <span className="flex items-center gap-1.5 text-slate-200">
               <Phone className="h-3 w-3 text-[#E8823A]" />
               <span className="text-slate-400 font-sans">CA Helpline:</span>
-              <a href="tel:8802222422" className="font-bold text-white hover:text-[#E8823A] transition-colors">
-                +91 880-2222-422
+              <a href="tel:9550765308" className="font-bold text-white hover:text-[#E8823A] transition-colors">
+                +91 9550765308 (Sameer)
               </a>
               <span className="text-slate-500">/</span>
-              <a href="tel:7972222422" className="font-bold text-white hover:text-[#E8823A] transition-colors">
-                +91 797-2222-422
+              <a href="tel:8802222422" className="font-bold text-white hover:text-[#E8823A] transition-colors">
+                +91 880-2222-422
               </a>
             </span>
           </div>
@@ -326,7 +326,7 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
 
             <div className="pt-2 text-center text-xs text-slate-500 font-mono flex items-center justify-center gap-1.5">
               <Phone className="h-3.5 w-3.5 text-[#E8823A]" />
-              <span>Helpline: +91 880-2222-422</span>
+              <span>Helpline: +91 9550765308 (Sameer) / +91 880-2222-422</span>
             </div>
           </div>
         </div>

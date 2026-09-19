@@ -130,7 +130,7 @@ export default function AboutPage(): JSX.Element {
 
                   <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5 shadow-sm">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#C43D6B] flex items-center gap-1">
-                      <MapPin className="h-3 w-3" /> Bengaluru Branch
+                      <MapPin className="h-3 w-3" /> Kadiri Branch
                     </span>
                     <p className="text-sm font-semibold text-slate-900">
                       {companyInfo.branchOffice.line1}
@@ -143,7 +143,11 @@ export default function AboutPage(): JSX.Element {
                   <div className="border-t border-slate-200 pt-4 space-y-2 text-xs text-slate-700">
                     <div className="flex items-center gap-2">
                       <Phone className="h-3.5 w-3.5 text-[#E8823A]" />
-                      <span className="font-mono">{companyInfo.phone.join(' / ')}</span>
+                      <span className="font-mono">
+                        {companyInfo.phoneDetails
+                          ? companyInfo.phoneDetails.map((p) => `${p.display} (${p.label})`).join(' • ')
+                          : companyInfo.phone.join(' / ')}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="h-3.5 w-3.5 text-[#E8823A]" />
