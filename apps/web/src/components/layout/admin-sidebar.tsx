@@ -19,6 +19,7 @@ import {
   Menu,
   X,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 
 export function AdminSidebar(): JSX.Element {
@@ -33,6 +34,7 @@ export function AdminSidebar(): JSX.Element {
     { name: 'Deadlines', href: '/admin/deadlines', icon: CalendarClock },
     { name: 'Invoices', href: '/admin/invoices', icon: ReceiptText },
     { name: 'Leads', href: '/admin/leads', icon: UserPlus },
+    { name: 'Knowledge Bank', href: '/admin/knowledge', icon: BookOpen },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ];
 

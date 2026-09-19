@@ -182,3 +182,166 @@ export interface ApiError {
   message: string;
   errors?: Record<string, string[]>;
 }
+
+// ---------------------------------------------------------------------------
+// Knowledge Bank (2026–2027 Regulatory Intelligence)
+// ---------------------------------------------------------------------------
+
+export enum KnowledgeDocType {
+  ACT = 'ACT',
+  RULE = 'RULE',
+  NOTIFICATION = 'NOTIFICATION',
+  CIRCULAR = 'CIRCULAR',
+  ORDER = 'ORDER',
+  INSTRUCTION = 'INSTRUCTION',
+  ADVISORY = 'ADVISORY',
+  PRESS_RELEASE = 'PRESS_RELEASE',
+  AMENDMENT = 'AMENDMENT',
+  FORM = 'FORM',
+  UTILITY = 'UTILITY',
+  CALCULATOR = 'CALCULATOR',
+  SCHEME = 'SCHEME',
+  JUDGMENT = 'JUDGMENT',
+  BULLETIN = 'BULLETIN',
+}
+
+export enum DocLegislationStatus {
+  CURRENT = 'CURRENT',
+  HISTORICAL = 'HISTORICAL',
+  AMENDED = 'AMENDED',
+  SUPERSEDED = 'SUPERSEDED',
+  REPEALED = 'REPEALED',
+}
+
+export enum AuthorityType {
+  CBDT = 'CBDT',
+  CBIC = 'CBIC',
+  GSTN = 'GSTN',
+  MCA = 'MCA',
+  RBI = 'RBI',
+  SEBI = 'SEBI',
+  IBBI = 'IBBI',
+  LABOUR_MINISTRY = 'LABOUR_MINISTRY',
+  GAZETTE_OF_INDIA = 'GAZETTE_OF_INDIA',
+  STATE_GOVT = 'STATE_GOVT',
+  HIGH_COURT = 'HIGH_COURT',
+  SUPREME_COURT = 'SUPREME_COURT',
+  OTHER = 'OTHER',
+}
+
+export enum ReviewStatus {
+  FETCHED = 'FETCHED',
+  PARSED = 'PARSED',
+  PENDING_REVIEW = 'PENDING_REVIEW',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  PUBLISHED = 'PUBLISHED',
+}
+
+export enum SourceStatus {
+  HEALTHY = 'HEALTHY',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
+  PAUSED = 'PAUSED',
+}
+
+export interface KnowledgeCategoryDto {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  parentId?: string | null;
+  icon?: string | null;
+  displayOrder: number;
+  isActive: boolean;
+  docCount?: number;
+}
+
+export interface KnowledgeDocumentDto {
+  id: string;
+  title: string;
+  slug: string;
+  summary?: string | null;
+  content?: string | null;
+  documentType: KnowledgeDocType;
+  categoryId: string;
+  categoryName?: string;
+  jurisdiction: string;
+  authority: AuthorityType;
+  documentNumber?: string | null;
+  publishedDate?: string | null;
+  effectiveDate?: string | null;
+  expiryDate?: string | null;
+  financialYear?: string | null;
+  assessmentYear?: string | null;
+  status: DocLegislationStatus;
+  reviewStatus: ReviewStatus;
+  officialSourceUrl?: string | null;
+  documentUrl?: string | null;
+  sourceDomain?: string | null;
+  isOfficial: boolean;
+  isFeatured: boolean;
+  isHistorical: boolean;
+  isSuperseded: boolean;
+  version: number;
+  lastVerifiedAt?: string | null;
+  amendments?: LegalAmendmentDto[];
+}
+
+export interface LegalAmendmentDto {
+  id: string;
+  documentId: string;
+  amendmentNumber?: string | null;
+  title: string;
+  description?: string | null;
+  effectiveDate?: string | null;
+  notificationId?: string | null;
+  previousText?: string | null;
+  newText?: string | null;
+}
+
+export interface ComplianceDeadlineItemDto {
+  id: string;
+  title: string;
+  category: string;
+  description?: string | null;
+  dueDate: string;
+  originalDate?: string | null;
+  isExtended: boolean;
+  extensionNote?: string | null;
+  period?: string | null;
+  entityType?: string | null;
+  form?: string | null;
+  section?: string | null;
+  sourceUrl?: string | null;
+  status: DocLegislationStatus;
+  financialYear: string;
+  priority: string;
+}
+
+export interface TaxRateItemDto {
+  id: string;
+  taxType: string;
+  category: string;
+  subCategory?: string | null;
+  rate: string;
+  threshold?: string | null;
+  effectiveFrom?: string | null;
+  effectiveTo?: string | null;
+  financialYear: string;
+  assessmentYear?: string | null;
+  sourceUrl?: string | null;
+  notes?: string | null;
+}
+
+export interface KnowledgeSearchQuery {
+  q?: string;
+  category?: string;
+  documentType?: string;
+  authority?: string;
+  financialYear?: string;
+  status?: string;
+  limit?: number;
+  page?: number;
+}
+
