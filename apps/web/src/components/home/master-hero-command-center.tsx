@@ -150,7 +150,7 @@ export function MasterHeroCommandCenter(): JSX.Element {
 
         <div className="hidden lg:flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-          <span>Live FY 2024-25 Engine</span>
+          <span>Live FY 2026-27 Engine</span>
         </div>
       </div>
 
@@ -405,10 +405,10 @@ export function MasterHeroCommandCenter(): JSX.Element {
           </div>
 
           <Link
-            href="/compliance-calendar"
+            href="/knowledge-bank/compliance-calendar"
             className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] text-white hover:opacity-95 font-bold text-xs shadow-md transition-all"
           >
-            <span>Open Complete 2025-26 Compliance Calendar &rarr;</span>
+            <span>Open Complete 2026-27 Compliance Calendar &rarr;</span>
           </Link>
         </div>
       )}

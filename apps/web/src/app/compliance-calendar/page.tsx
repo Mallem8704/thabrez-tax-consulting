@@ -4,16 +4,16 @@ import { ComplianceCalendarView } from '../../components/compliance/compliance-c
 import { Calendar } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Statutory Compliance Calendar India (FY 2024-25 & 2025-26) | Thabrez Tax Consulting',
+  title: 'Statutory Compliance Calendar India (FY 2026–2027) | Thabrez Tax Consulting',
   description:
     'Comprehensive statutory due date calendar for Indian businesses: GST Returns (GSTR-1, GSTR-3B), TDS Challans & Returns, Advance Tax, ITR Filing, MCA AOC-4 & MGT-7, and PF/ESI remittances.',
   keywords: [
-    'Statutory Compliance Calendar India',
-    'GST Due Date Calendar 2025',
+    'Statutory Compliance Calendar India 2026-2027',
+    'GST Due Date Calendar 2026',
     'TDS Return Due Dates',
     'Income Tax Return Deadline',
     'Advance Tax Installment Dates',
-    'ROC Compliance Calendar 2025',
+    'ROC Compliance Calendar 2026',
   ],
   openGraph: {
     title: 'Statutory Compliance Calendar India — Complete Due Dates Guide',

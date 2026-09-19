@@ -19,6 +19,7 @@ import {
   Menu,
   X,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 
 export function AdminSidebar(): JSX.Element {
@@ -28,6 +29,7 @@ export function AdminSidebar(): JSX.Element {
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Knowledge Bank', href: '/knowledge', icon: BookOpen },
     { name: 'Clients', href: '/clients', icon: Users },
     { name: 'Cases', href: '/cases', icon: Briefcase },
     { name: 'Documents', href: '/documents', icon: FolderLock },
