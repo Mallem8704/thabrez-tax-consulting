@@ -69,7 +69,7 @@ export function Footer(): JSX.Element {
               <div className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 text-[#E8823A] shrink-0" />
                 <span className="font-mono">
-                  <a href="tel:9550765308" className="hover:text-white">9550765308 (Sameer)</a> • <a href="tel:8802222422" className="hover:text-white">880-2222-422</a>
+                  <a href="tel:7972222422" className="hover:text-white">797-2222-422 (Syed Thabrez)</a> • <a href="tel:8802222422" className="hover:text-white">880-2222-422</a>
                 </span>
               </div>
             </div>

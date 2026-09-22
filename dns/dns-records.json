@@ -1,0 +1,77 @@
+[
+  {
+    "type": "A",
+    "name": "@",
+    "value": "76.76.21.21",
+    "ttl": 14400,
+    "description": "Vercel Apex Domain Routing"
+  },
+  {
+    "type": "CNAME",
+    "name": "www",
+    "value": "e4751a288723d372.vercel-dns-017.com",
+    "ttl": 14400,
+    "description": "Vercel Subdomain Routing"
+  },
+  {
+    "type": "CNAME",
+    "name": "qlnarm3lp5cm",
+    "value": "gv-qrzdaxgh37jdg3.dv.googlehosted.com",
+    "ttl": 14400,
+    "description": "Google Domain Verification 1"
+  },
+  {
+    "type": "CNAME",
+    "name": "r3fxk7c5jyce",
+    "value": "gv-ytqgyikkbpc2vi.dv.googlehosted.com",
+    "ttl": 14400,
+    "description": "Google Domain Verification 2"
+  },
+  {
+    "type": "CNAME",
+    "name": "z52j5jd6ldrf",
+    "value": "gv-zug42rehq7r7wp.dv.googlehosted.com",
+    "ttl": 14400,
+    "description": "Google Domain Verification 3"
+  },
+  {
+    "type": "MX",
+    "name": "@",
+    "value": "aspmx.l.google.com",
+    "priority": 1,
+    "ttl": 14400,
+    "description": "Google Workspace Primary Mail Server"
+  },
+  {
+    "type": "MX",
+    "name": "@",
+    "value": "alt1.aspmx.l.google.com",
+    "priority": 5,
+    "ttl": 14400,
+    "description": "Google Workspace Backup Mail Server 1"
+  },
+  {
+    "type": "MX",
+    "name": "@",
+    "value": "alt2.aspmx.l.google.com",
+    "priority": 5,
+    "ttl": 14400,
+    "description": "Google Workspace Backup Mail Server 2"
+  },
+  {
+    "type": "MX",
+    "name": "@",
+    "value": "alt3.aspmx.l.google.com",
+    "priority": 10,
+    "ttl": 14400,
+    "description": "Google Workspace Backup Mail Server 3"
+  },
+  {
+    "type": "MX",
+    "name": "@",
+    "value": "alt4.aspmx.l.google.com",
+    "priority": 10,
+    "ttl": 14400,
+    "description": "Google Workspace Backup Mail Server 4"
+  }
+]

@@ -1,0 +1,12 @@
+Type,Host,Value,TTL,Priority
+A,@,76.76.21.21,14400,
+CNAME,www,e4751a288723d372.vercel-dns-017.com,14400,
+CNAME,qlnarm3lp5cm,gv-qrzdaxgh37jdg3.dv.googlehosted.com,14400,
+CNAME,r3fxk7c5jyce,gv-ytqgyikkbpc2vi.dv.googlehosted.com,14400,
+CNAME,z52j5jd6ldrf,gv-zug42rehq7r7wp.dv.googlehosted.com,14400,
+MX,@,aspmx.l.google.com,14400,1
+MX,@,alt1.aspmx.l.google.com,14400,5
+MX,@,alt2.aspmx.l.google.com,14400,5
+MX,@,alt3.aspmx.l.google.com,14400,10
+MX,@,alt4.aspmx.l.google.com,14400,10
+TXT,@,v=spf1 include:_spf.google.com ~all,14400,

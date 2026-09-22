@@ -136,10 +136,10 @@ export default function ContactPage(): JSX.Element {
                 <WhatsAppIcon size={18} className="fill-white" /> Quick WhatsApp Consultation
               </a>
               <a
-                href="tel:9550765308"
+                href="tel:7972222422"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-white/20 border border-white/20 transition-all"
               >
-                <PhoneCall className="h-4 w-4 text-[#E8823A]" /> Direct CA Call: +91 9550765308 (Sameer)
+                <PhoneCall className="h-4 w-4 text-[#E8823A]" /> Direct CA Call: +91 797-2222-422 (Syed Thabrez)
               </a>
             </div>
           </div>

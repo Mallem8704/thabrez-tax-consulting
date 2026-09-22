@@ -1,0 +1,26 @@
+$ORIGIN thabreztaxconsulting.com.
+$TTL 14400
+
+; ==============================================================================
+; DNS ZONE CONFIGURATION FOR THABREZTAXCONSULTING.COM
+; Configured for Vercel Hosting + Google Workspace Email + Domain Verification
+; ==============================================================================
+
+; --- Web Hosting (Vercel) ---
+@                   IN  A       76.76.21.21
+www                 IN  CNAME   e4751a288723d372.vercel-dns-017.com.
+
+; --- Google Domain Verification ---
+qlnarm3lp5cm        IN  CNAME   gv-qrzdaxgh37jdg3.dv.googlehosted.com.
+r3fxk7c5jyce        IN  CNAME   gv-ytqgyikkbpc2vi.dv.googlehosted.com.
+z52j5jd6ldrf        IN  CNAME   gv-zug42rehq7r7wp.dv.googlehosted.com.
+
+; --- Google Workspace Mail Exchange (MX) Records ---
+@                   IN  MX  1   aspmx.l.google.com.
+@                   IN  MX  5   alt1.aspmx.l.google.com.
+@                   IN  MX  5   alt2.aspmx.l.google.com.
+@                   IN  MX  10  alt3.aspmx.l.google.com.
+@                   IN  MX  10  alt4.aspmx.l.google.com.
+
+; --- SPF Record for Email Deliverability ---
+@                   IN  TXT     "v=spf1 include:_spf.google.com ~all"

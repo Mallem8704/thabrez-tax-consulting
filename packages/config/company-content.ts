@@ -10,9 +10,9 @@ export const companyInfo = {
     city: "Kadiri, Sri Satya Sai District",
     pincode: "515591",
   },
-  phone: ["9550765308", "880-2222-422"], // 9550765308 (Sameer) & 880-2222-422
+  phone: ["797-2222-422", "880-2222-422"], // 797-2222-422 (Syed Thabrez) & 880-2222-422
   phoneDetails: [
-    { number: "9550765308", label: "Sameer", display: "+91 9550765308" },
+    { number: "797-2222-422", label: "Syed Thabrez", display: "+91 797-2222-422" },
     { number: "880-2222-422", label: "Helpline", display: "+91 880-2222-422" },
   ],
   email: "info@thabreztaxconsulting.com",
