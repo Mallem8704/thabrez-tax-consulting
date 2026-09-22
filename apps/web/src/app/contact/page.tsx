@@ -139,7 +139,7 @@ export default function ContactPage(): JSX.Element {
                 href="tel:7972222422"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-white/20 border border-white/20 transition-all"
               >
-                <PhoneCall className="h-4 w-4 text-[#E8823A]" /> Direct CA Call: +91 797-2222-422 (Syed Thabrez)
+                <PhoneCall className="h-4 w-4 text-[#E8823A]" /> Direct CA Call: +91 797-2222-422
               </a>
             </div>
           </div>
