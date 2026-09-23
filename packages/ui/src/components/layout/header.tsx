@@ -54,7 +54,7 @@ export function Header({ currentPath = '/' }: HeaderProps): JSX.Element {
       <div className="bg-[#1B2A4A] py-1.5 px-4 text-slate-200 text-[11px] flex items-center justify-between lg:hidden">
         <span className="flex items-center gap-1.5 text-[11px] font-semibold text-white truncate">
           <ShieldCheck className="h-3.5 w-3.5 text-[#E8823A] shrink-0" />
-          <span>ICAI Certified Advisory</span>
+          <span>Chartered Tax Advisory</span>
         </span>
         <a
           href="tel:8802222422"

@@ -129,9 +129,9 @@ export default function HomePage(): JSX.Element {
               <div className="lg:col-span-6 space-y-6 text-center lg:text-left cinematic-fade-left">
                 {/* Punchy Master Headline */}
                 <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl font-display leading-[1.12] text-white">
-                  Precision Tax Law.<br />
+                  We Plan Your TAXES<br />
                   <span className="bg-gradient-to-r from-emerald-300 via-amber-200 to-[#E8823A] bg-clip-text text-transparent">
-                    Zero-Penalty Peace of Mind.
+                    Without TAXING You.
                   </span>
                 </h1>
 
@@ -159,23 +159,21 @@ export default function HomePage(): JSX.Element {
                   ))}
                 </div>
 
-                {/* High-Converting Action CTAs */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
-                  <Link href="/contact" className="w-full sm:w-auto">
-                    <Button
-                      size="xl"
-                      className="w-full sm:w-auto bg-gradient-to-r from-[#8B3FA8] via-[#A83279] to-[#E8823A] text-white hover:opacity-95 font-bold shadow-2xl px-8 h-12 rounded-xl text-xs sm:text-sm shimmer-sweep"
-                    >
-                      <span>Book Free Partner Consultation</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
+                {/* Direct High-Conversion Action CTAs */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-3 justify-center lg:justify-start">
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-gradient-to-r from-[#8B3FA8] to-[#E8823A] hover:from-[#7A2E97] hover:to-[#D57029] text-white font-bold text-sm shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] group"
+                  >
+                    <span>Claim Free 30-Min Tax Audit</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
 
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 h-12 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm backdrop-blur-sm transition-all"
                   >
                     <WhatsAppIcon size={18} className="fill-white" />
                     <span>WhatsApp a CA</span>
@@ -197,7 +195,7 @@ export default function HomePage(): JSX.Element {
                   </div>
                   <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
                     <CheckCircle2 className="h-4 w-4 text-[#E8823A] shrink-0" />
-                    <span>100% ICAI Certified</span>
+                    <span>100% Statutory Compliant</span>
                   </div>
                   <div className="flex items-center gap-2 rounded-xl bg-white/5 p-2.5 border border-white/10 backdrop-blur-sm cinematic-card">
                     <Lock className="h-4 w-4 text-emerald-400 shrink-0" />
