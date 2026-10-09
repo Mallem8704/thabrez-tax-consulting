@@ -122,52 +122,7 @@ export interface TeamMember {
   specialization: string[];
 }
 
-export const teamMembers: TeamMember[] = [
-  {
-    id: "ca-thabrez",
-    name: "CA. Thabrez, FCA",
-    title: "Managing Director & Senior Tax Partner",
-    role: "Senior Partner",
-    registrationNumber: "ICAI M.No: 238491",
-    photoUrl: "/team/ca-thabrez.png",
-    qualifications: "B.Com, FCA, DISA (ICAI), Certificate in International Taxation",
-    bio: "Fellow Chartered Accountant with 15+ years of practice in direct taxation, corporate structuring, and High Court appellate advocacy. Specialized in resolving intricate search & seizure proceedings and cross-border transfer pricing.",
-    specialization: ["Direct Tax Litigation", "Appellate Appeals (ITAT/HC)", "Corporate Structuring", "Project Financing"],
-  },
-  {
-    id: "ca-ananya-reddy",
-    name: "CA. Ananya Reddy, ACA",
-    title: "Partner — Indirect Taxes & GST Compliance",
-    role: "Partner",
-    registrationNumber: "ICAI M.No: 289104",
-    photoUrl: "/team/ca-ananya.png",
-    qualifications: "B.Com, ACA, GST Certified Practitioner (ICAI)",
-    bio: "Oversees the Indirect Tax practice assisting multinational manufacturing and e-commerce enterprises with GST audit defense, departmental summons, refunds, and supply chain tax optimization.",
-    specialization: ["GST Advisory & Audit", "ITC Optimization", "Departmental Show Cause Defense", "Customs Advisory"],
-  },
-  {
-    id: "cs-karthik-iyer",
-    name: "CS. Karthik Iyer, ACS",
-    title: "Head of Corporate Governance & Secretarial Practice",
-    role: "Corporate Secretarial Lead",
-    registrationNumber: "ICSI M.No: 41209",
-    photoUrl: "/team/cs-karthik.png",
-    qualifications: "B.A. LL.B (Hons), ACS",
-    bio: "Leads MCA/ROC statutory compliances, cross-border FDI advisory, shareholder agreements, and NCLT corporate restructuring matters.",
-    specialization: ["ROC Annual Filing", "Private Equity Secretarial Diligence", "FEMA & RBI Compliance", "NCLT Petitions"],
-  },
-  {
-    id: "arun-kumar",
-    name: "Arun Kumar, MBA (Finance)",
-    title: "Head of Banking & Debt Syndication",
-    role: "Banking & Loan Advisory Lead",
-    registrationNumber: "AMFI Reg: 109283",
-    photoUrl: "/team/arun-kumar.png",
-    qualifications: "B.Tech, MBA (Finance, IIM Kozhikode)",
-    bio: "Specializes in project report preparation, financial modeling, CMA data preparation, and institutional debt financing with leading public & private sector banks.",
-    specialization: ["Bankable Project Reports", "CMA Data Preparation", "Working Capital Syndication", "Term Loan Structuring"],
-  },
-];
+export const teamMembers: TeamMember[] = [];
 
 export interface DetailedService {
   slug: string;
